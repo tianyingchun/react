@@ -1,66 +1,160 @@
 {
-    "plugins": ["react"],
-    "ecmaFeatures": {
-        "blockBindings": true,
-        "forOf": true,
-        "jsx": true,
-        "modules": true,
-        "classes": true,
-        "blockBindings": true,
-        "destructuring": true,
-        "arrowFunctions": true,
-        "defaultParams": true,
-        "forOf": true,
-        "generators": true
-    },
-    "env": {
-        "browser": true,
-        "es6": true,
-        "mocha": true
-    },
-    "rules": {
-        // babel-eslint
-        // http://eslint.org/docs/rules/
-        "quotes": [2, "single"], // no 3 but ''
-        "strict": [2, "never"], // babel-eslint has some issue with "use strict" , disable it
-        "no-console": 2,
-        "no-undef": 0,
-        "no-underscore-dangle": 0, // would be nice to refactor this, may points to design issue!?
-        "no-use-before-define": 0, // should be covered by unit tests
-        // eslint-plugin-react
-        "react/wrap-multilines": 2, // parenthesis when doing return (<div>..</div>) on multilines
-        // methods order in the class must follow the lifecycle order
-        "react/sort-comp": [2, {
-            order: [ 'lifecycle', 'everything-else', 'render' ],
-            groups: {
-                lifecycle: [
-                  'displayName',
-                  'propTypes',
-                  'mixins',
-                  'statics',
-                  'constructor', // constructor is not specified in the default group.lifecycle, so it's added there!
-                  'getDefaultProps',
-                  'getInitialState',
-                  'componentWillMount',
-                  'componentDidMount',
-                  'componentWillReceiveProps',
-                  'shouldComponentUpdate',
-                  'componentWillUpdate',
-                  'componentDidUpdate',
-                  'componentWillUnmount'
-                ]
-            }
-        }],
-        "react/react-in-jsx-scope": 2, // React must be require(), not global
-        "react/prop-types": 2, // all this.props.XXX must have XXX defined in propTypes
-        "react/no-unknown-property": 2, // warn unknown jsx properties (only class= it seems?!)
-        "react/no-multi-comp": 2, // one react component per file
-        "react/no-did-update-set-state": 1, // no setState in componentDidUpdate (to avoid retrigger another render)  (seems to not work in ES6 style?)
-        "react/no-did-mount-set-state": [ 1, "allow-in-func" ], // no setState in componentDidMount (to avoid retrigger another render) (seems to not work in ES6 style?)
-        "react/jsx-sort-prop-types": 2, // order propTypes alphabetically
-        "react/jsx-sort-props": 0, // not mandatory to set them alphabetically when using the component
-        "react/jsx-no-undef": 2, // check for non imported component used in the JSX
-        "react/jsx-quotes": [ 2, "double", "avoid-escape"], // <Hello name="John" />; or <Hello name='John "and" Me' />;
-        "react/jsx-boolean-value": [ 2, "always" ]
-    }
+  // I want to use babel-eslint for parsing!
+  "parser": "babel-eslint",
+  "env": {
+    // I write for browser
+    "browser": true,
+    // in CommonJS
+    "node": true,
+    // use ES6
+    "es6": true
+  },
+  "globals": {
+    "React":true,
+    "$": true
+  },
+  "ecmaProperties": {
+    // enable JSX support
+    "jsx": true
+  },
+  "plugins": [
+    // enable react plugin
+    "react"
+  ],
+  // To give you an idea how to override rule options
+  "rules": {
+    // Possible Errors
+    "comma-dangle": 0,
+    "no-console": 1,
+    "no-debugger": 2,
+    "no-dupe-keys": 2,
+    "no-dupe-args": 2,
+    "no-empty": 2,
+    "no-extra-boolean-cast": 2,
+    "no-extra-semi": 2,
+    "no-invalid-regexp": 2,
+    "no-irregular-whitespace": 2,
+    "no-reserved-keys": 0,
+    "no-sparse-arrays": 2,
+    "no-unreachable": 2,
+    "use-isnan": 2,
+    "valid-jsdoc": 2,
+    "valid-typeof": 2,
+    // Best Practices
+    "consistent-return": 1,
+    "curly": 2,
+    "default-case": 0,
+    "dot-notation": 2,
+    "eqeqeq": 2,
+    "no-alert": 2,
+    "no-caller": 2,
+    "no-else-return": 2,
+    "no-eq-null": 2,
+    "no-eval": 2,
+    "no-extend-native": 2,
+    "no-floating-decimal": 2,
+    "no-implied-eval": 2,
+    "no-iterator": 2,
+    "no-labels": 2,
+    "no-loop-func": 1,
+    "no-lone-blocks": 2,
+    "no-multi-spaces": 2,
+    "no-native-reassign": 2,
+    "no-new": 2,
+    "no-new-func": 2,
+    "no-new-wrappers": 2,
+    "no-proto": 2,
+    "no-redeclare": 2,
+    "no-return-assign": 2,
+    "no-script-url": 2,
+    "no-self-compare": 2,
+    "no-sequences": 2,
+    "no-throw-literal": 2,
+    "no-unused-expressions": 2,
+    "no-void": 2,
+    "radix": 2,
+    "yoda": 0,
+    // Strict Mode
+    "strict": 0,
+    // Variables
+    "no-catch-shadow": 2,
+    "no-delete-var": 2,
+    "no-shadow": 2,
+    "no-shadow-restricted-names": 2,
+    "no-undef": 2,
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+    "no-use-before-define": 2,
+    // Node
+    "handle-callback-err": 2,
+    "no-new-require": 2,
+    "no-path-concat": 2,
+    // Stylistic Issues
+    "indent": [2, 2, {"SwitchCase": 1}], // 2 spaces
+    "camelcase": 2,
+    "comma-spacing": [2, {"before": false, "after": true}],
+    "comma-style": [2, "last"],
+    "eol-last": 2,
+    "func-style": [0, "expression"],
+    "max-nested-callbacks": [2, 3],
+    "no-array-constructor": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-multiple-empty-lines": [1, {"max": 2}],
+    "no-nested-ternary": 2,
+    "no-new-object": 2,
+    "no-spaced-func": 2,
+    "no-trailing-spaces": 2,
+    "no-underscore-dangle": 1,
+    "no-extra-parens": [2,'functions'],
+    "quote-props": [1, "as-needed"],
+    "quotes": [1, "single"],
+    "semi": [2, "always"],
+    "semi-spacing": [2, {"before": false, "after": true}],
+    "space-before-function-paren": [2, "always"],
+    "space-after-keywords": [1, "always"],
+    "space-before-blocks": [1, "always"],
+    "object-curly-spacing":[2, "always"],
+    "array-bracket-spacing":[2, "always"],
+    "space-in-parens": [1, "never"],
+    "space-infix-ops": 2,
+    // complexity rules
+    "max-depth": [2, 2],
+    "max-statements": [2, 8],
+    "complexity": [2, 5],
+    "max-len": [2, 120],
+    "max-params": [2, 2],
+    "max-nested-callbacks": [2, 1],
+    // jsx rules
+    "react/jsx-quotes": 1,
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/react-in-jsx-scope": 1,
+    // methods order in the class must follow the lifecycle order
+    "react/sort-comp": [2, {
+        order: [ 'lifecycle', 'everything-else', 'render' ],
+        groups: {
+            lifecycle: [
+              'displayName',
+              'propTypes',
+              'mixins',
+              'statics',
+              'constructor', // constructor is not specified in the default group.lifecycle, so it's added there!
+              'getDefaultProps',
+              'getInitialState',
+              'componentWillMount',
+              'componentDidMount',
+              'componentWillReceiveProps',
+              'shouldComponentUpdate',
+              'componentWillUpdate',
+              'componentDidUpdate',
+              'componentWillUnmount'
+            ]
+        }
+    }],
+    "react/self-closing-comp": 1,
+    "react/wrap-multilines": 1
+  }
 }

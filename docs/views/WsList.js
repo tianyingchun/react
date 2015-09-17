@@ -5,9 +5,9 @@ import * as WsListActions from '../actions/WsListActions';
 import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router';
 import WorkspaceList from '../components/WorkspaceList';
-import ReactButton from '../components/Button';
 import Button from '../../src/components/button';
 import Icon from '../../src/components/icon';
+import ScrollArea from '../../src/components/scrollbar';
 
 @connect((state) => ({ workspaces: state.workspaces }))
 class WsList extends Component {
@@ -43,20 +43,48 @@ class WsList extends Component {
     };
 
     let isLoading = workspaces.isLoading;
-    let loadingTxt = isLoading ? 'LOADING.....' : 'INIIAL';
+    let loadingTxt = isLoading ? true : false;
 
     console.log('loading: ', loadingTxt);
 
     // manully dispatch action.
     return (
-      <div>
-        <Button href="www.baidu.com" amStyle={'primary'}><Icon icon={'comment'}/> React Button</Button>
-        <ReactButton loading={ loadingTxt }/>
+      <ScrollArea speed={0.8} className="area" contentClassName="content" horizontal={false}>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <p>sdfsf</p>
+        <Button amSize={'sm'} disabled={isLoading} onClick={() => this.action.getExistedWsList({ timeout:5000 })} amStyle={'primary'}>
+          <Icon amStyle={'secondary'} amSize={'sm'} spin={isLoading} icon={'comment'}/>
+          Reload data
+        </Button>
         <div><Link to="/about">About</Link></div>
         <DocumentMeta {...meta} />
         <WorkspaceList workspaces= { workspaces.list || workspaces } />
-        <button onClick={() => this.action.getExistedWsList({ timeout:5000 })}>trigger add</button>
-      </div>
+      </ScrollArea>
     );
   }
 }

@@ -15,12 +15,10 @@ class Button extends mixin(ClassNameMixin) {
     round: React.PropTypes.bool,
     componentTag: React.PropTypes.node,
     href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    isLoading: React.PropTypes.bool
+    target: React.PropTypes.string
   }
 
   static defaultProps = {
-    isLoading: false,
     classPrefix: 'btn',
     type: 'button',
     amStyle: 'default'

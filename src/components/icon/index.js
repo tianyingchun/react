@@ -7,10 +7,10 @@ class Icon extends mixin(ClassNameMixin) {
 
   static propTypes = {
     amStyle: React.PropTypes.string,
+    amSize: React.PropTypes.string,
     fw: React.PropTypes.bool,
     spin: React.PropTypes.bool,
     button: React.PropTypes.bool,
-    size: React.PropTypes.string,
     href: React.PropTypes.string,
     componentTag: React.PropTypes.node.isRequired,
     icon: React.PropTypes.string.isRequired
@@ -18,7 +18,7 @@ class Icon extends mixin(ClassNameMixin) {
 
   static defaultProps = {
     classPrefix: 'glyph',
-    componentTag: 'span'
+    componentTag: 'i'
   }
 
   render () {

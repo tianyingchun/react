@@ -1,4 +1,5 @@
-module.export = function (grunt) {
+module.exports = function (grunt) {
+
   grunt.initConfig({
     // Eslint task for current project.
     eslint: {
@@ -7,19 +8,20 @@ module.export = function (grunt) {
         configFile: '.eslintrc'
       },
       react: [
-        './components/**/*{.jsx,.js}'
+        './docs/**/*{.jsx,.js}'
       ]
     },
     nodemon: {
-      server: {
-        script: './bin/www',
+      isomorphic: {
+        script: './isomorphic',
         options: {
-          nodeArgs: [ /*'--debug', '--harmony'*/ ],
+          nodeArgs: [ /*'--debug' */],
           ignore: ['node_modules/**'],
           env: {
-            PORT: '4000',
+            PORT: '2000',
             // for development, isomorphic server render react
-            NODE_ENV: 'development',
+            NODE_ENV: '',
+            DEBUG: 'iso:*,',
             DEBUG_COLORS: true
           },
           ext: 'js,jsx,html,ejs'
@@ -30,6 +32,7 @@ module.export = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
 
+  // Load customized webpack build infrastructure.
+  require('./buildtool')(grunt);
 
-
-}
+};

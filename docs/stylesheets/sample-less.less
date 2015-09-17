@@ -1,0 +1,18 @@
+.main-less {
+  background: #f0f0f0;
+}
+
+[class*="am-animation-less"] {
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+
+/* Hide animated element if scrollSpy is used */
+
+@media screen {
+  .cssanimations-less [data-am-scrollspy*="animation"] {
+    opacity: 0;
+  }
+}

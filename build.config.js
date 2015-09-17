@@ -38,7 +38,7 @@ module.exports = {
         routes: './docs/app/routes.js',
         version: '',
         jsBundles: ['browser-polyfill.js', 'reactkits.js', 'docs/reactui/bundle.js${version}'],
-        cssBundles: ['docs/reactui/bundle.css${version}']
+        cssBundles: ['glodon.css','docs/reactui/bundle.css${version}']
       }
     }
   }

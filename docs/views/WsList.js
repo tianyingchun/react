@@ -6,6 +6,8 @@ import DocumentMeta from 'react-document-meta';
 import { Link } from 'react-router';
 import WorkspaceList from '../components/WorkspaceList';
 import ReactButton from '../components/Button';
+import Button from '../../src/components/button';
+import Icon from '../../src/components/Icon';
 
 @connect((state) => ({ workspaces: state.workspaces }))
 class WsList extends Component {
@@ -48,6 +50,7 @@ class WsList extends Component {
     // manully dispatch action.
     return (
       <div>
+        <Button href="www.baidu.com" amStyle={'primary'}><Icon icon={'comment'}/> React Button</Button>
         <ReactButton loading={ loadingTxt }/>
         <div><Link to="/about">About</Link></div>
         <DocumentMeta {...meta} />

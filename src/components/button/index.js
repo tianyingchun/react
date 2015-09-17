@@ -1,15 +1,74 @@
-import { mixin1, mixin2 } from '../../mixins/Test1';
+import React, { Component } from 'react';
+import reactMixin from 'react-mixin';
+import classNames from 'classnames';
+import omit from 'object.omit';
+import ClassNameMixin from '../../mixins/ClassNameMixin';
 
-class MyComponent extends mixin(mixin1, mixin2) {
+class Button extends Component {
 
-  componentWillMount () {
-    super.componentWillMount();
+  static propTypes = {
+    classPrefix: React.PropTypes.string.isRequired,
+    active: React.PropTypes.bool,
+    block: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    radius: React.PropTypes.bool,
+    round: React.PropTypes.bool,
+    componentTag: React.PropTypes.node,
+    href: React.PropTypes.string,
+    target: React.PropTypes.string,
+    isLoading: React.PropTypes.bool
+  }
+
+  static defaultProps = {
+    isLoading: false,
+    classPrefix: 'btn',
+    type: 'button',
+    amStyle: 'default'
+  }
+
+  // state = {
+  //   loading: this.props.loading
+  // }
+
+  renderAnchor (classSet) {
+    const Component = this.props.componentTag || 'a';
+    const href = this.props.href || '#';
+    const props = omit(this.props, 'type');
+
+    return (
+      <Component
+        {...props}
+        href={href}
+        className={classNames(this.props.className, classSet)}
+        role="button">
+        {this.props.children}
+      </Component>
+    );
+  }
+
+  renderButton (classSet) {
+    let Component = this.props.componentTag || 'button';
+
+    return (
+      <Component
+        {...this.props}
+        className={classNames(this.props.className, classSet)}>
+        {this.props.children}
+      </Component>
+    );
   }
 
   render () {
-    super.render();
-    return <div> hello </div> ;
+    let classSet = this.getClassSet();
+    let renderType = this.props.href || this.props.target ?
+      'renderAnchor' : 'renderButton';
+    // block button
+    this.props.block && (classSet[this.prefixClass('block')] = true);
+
+    return this[renderType](classSet);
   }
 }
 
-export default MyComponent;
+reactMixin(Button.prototype, ClassNameMixin);
+
+export default Button;

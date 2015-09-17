@@ -79,6 +79,7 @@ const getRenderParams = (req, env) => {
       // the routes of current sub project(project).
       routes = require(path.join(process.cwd(), fundProject.routes));
     } catch (e) {
+      console.log(e);
       routes = null;
     }
   } else {

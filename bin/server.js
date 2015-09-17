@@ -7,10 +7,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { RoutingContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation'
-import configureStore from './docs/app/configureStore';
-import fetchComponentData from './docs/utils/fetchComponentData';
-import HtmlHead from './docs/components/HtmlHead';
-import getRenderParams from './docs/utils/getISORenderParams';
+import configureStore from '../docs/app/configureStore';
+import fetchComponentData from '../docs/utils/fetchComponentData';
+import HtmlHead from '../docs/components/HtmlHead';
+import getRenderParams from '../docs/utils/getISORenderParams';
 import compression from 'compression';
 import { minify } from 'html-minifier';
 
@@ -23,10 +23,10 @@ const profiler = new execTime('[ISO]', NODE_ENV === 'development', 'ms');
 app.use(compression());
 
 
-app.use(favicon(path.join(__dirname, './public/favicon.ico')));
+app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
 
 // Use this middleware to serve up static files built into the dist directory, milliseconds
-app.use("/public", cors(), express.static(path.join(__dirname, './public'), { maxAge: '30 days'}));
+app.use("/public", cors(), express.static(path.join(__dirname, '../public'), { maxAge: '30 days'}));
 
 // This is fired every time the server side receives a request
 app.use(handleRender);

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import reactMixin from 'react-mixin';
+import mixin from '../../utils/mixin';
 import classNames from 'classnames';
 import omit from 'object.omit';
 import ClassNameMixin from '../../mixins/ClassNameMixin';
 
-class Button extends Component {
+class Button extends mixin(ClassNameMixin) {
 
   static propTypes = {
     classPrefix: React.PropTypes.string.isRequired,
@@ -68,7 +68,5 @@ class Button extends Component {
     return this[renderType](classSet);
   }
 }
-
-reactMixin(Button.prototype, ClassNameMixin);
 
 export default Button;

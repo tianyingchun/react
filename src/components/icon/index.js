@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import reactMixin from 'react-mixin';
+import mixin from '../../utils/mixin';
 import ClassNameMixin from '../../mixins/ClassNameMixin';
 
-class Icon extends Component {
+class Icon extends mixin(ClassNameMixin) {
 
   static propTypes = {
     amStyle: React.PropTypes.string,
@@ -28,19 +28,22 @@ class Icon extends Component {
     let prefixClass = this.prefixClass;
     let setClassNamespace = this.setClassNamespace;
 
-    // icon-[iconName]
+    //glyph-icon
+    classes['glyph-icon'] = true;
+
+    // glyph-[iconName]
     classes[prefixClass(props.icon)] = true;
 
-    // icon-btn
+    // glyph-btn
     classes[prefixClass('btn')] = props.button;
 
     // button style
     props.button && props.amStyle && (classes[setClassNamespace(props.amStyle)] = true);
 
-    // icon-fw
+    // glyph-fw
     classes[prefixClass('fw')] = props.fw;
 
-    // icon-spin
+    // glyph-spin
     classes[prefixClass('spin')] = props.spin;
 
     return (
@@ -52,7 +55,5 @@ class Icon extends Component {
     );
   }
 }
-
-reactMixin(Icon.prototype, ClassNameMixin);
 
 export default Icon;

@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import WorkspaceList from '../components/WorkspaceList';
 import ReactButton from '../components/Button';
 import Button from '../../src/components/button';
-import Icon from '../../src/components/Icon';
+import Icon from '../../src/components/icon';
 
 @connect((state) => ({ workspaces: state.workspaces }))
 class WsList extends Component {

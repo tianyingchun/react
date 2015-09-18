@@ -8,6 +8,7 @@ import WorkspaceList from '../components/WorkspaceList';
 import Button from '../../src/components/button';
 import Icon from '../../src/components/icon';
 import ScrollArea from '../../src/components/scrollarea';
+import DraggableApp from '../../src/components/draggable/demo';
 
 @connect((state) => ({ workspaces: state.workspaces }))
 class WsList extends Component {
@@ -49,7 +50,7 @@ class WsList extends Component {
 
     // manully dispatch action.
     return (
-      <ScrollArea speed={0.8} width={400} height={400} className="area" contentClassName="content">
+      <ScrollArea speed={0.8} width={400} height={400} className="area" amSize={'sm'} contentClassName="content">
         <p>sdfsf</p>
         <p>sdfsf</p>
         <p>sdfsf</p>
@@ -77,6 +78,7 @@ class WsList extends Component {
         <p>sdfsf</p>
         <p>sdfsf</p>
         <p>sdfsf</p>
+        <DraggableApp />
         <Button amSize={'sm'} disabled={isLoading} onClick={() => this.action.getExistedWsList({ timeout:5000 })} amStyle={'primary'}>
           <Icon amStyle={'secondary'} amSize={'sm'} spin={isLoading} icon={'comment'}/>
           Reload data

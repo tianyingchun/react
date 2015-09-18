@@ -12,6 +12,7 @@ Scrollbars
     vertical={Boolean}
     height={Number}
     width={Number}
+    amSize={'sm'|'md'}
     >
 ```
 

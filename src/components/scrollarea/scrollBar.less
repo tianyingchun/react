@@ -1,0 +1,104 @@
+//
+// We provider `scrollarea` compnent for all lang items page content
+// Component:        `scrollArea`
+//
+// Modifiers:         `scrollarea-xs`
+//
+
+//
+// Variables
+// ===================================================================
+
+// for scrollbar-md horizontal
+@scrollbar-horizontal-height: 10px;
+// for scrollbar-sm horizontal
+@scrollbar-horizontal-sm-height: 6px;
+
+// for scrollbar-md horizontal
+@scrollbar-vertical-width: 10px;
+
+// for scrollbar-sm
+@scrollbar-vertical-sm-width: 6px;
+
+// the left and right gutter to scroller-container
+@scrollbar-gutter: 1px;
+
+.scrollarea {
+  position: relative;
+  overflow: hidden;
+
+  .scrollarea-content {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scrollbar-container {
+
+    &.horizontal {
+      width: 100%;
+      height: @scrollbar-horizontal-height;
+      left: 0;
+      bottom: 0;
+
+      // for scrollbar-sm horizontal.
+      &.scrollbar-sm {
+        height: @scrollbar-horizontal-sm-height;
+        .scrollbar {
+          height: (@scrollbar-horizontal-sm-height)-(@scrollbar-gutter*2);
+        }
+      }
+
+      .scrollbar {
+        width: 20px;
+        height: (@scrollbar-horizontal-height)-(@scrollbar-gutter*2);
+        background: black;
+        margin-top: @scrollbar-gutter;
+      }
+    }
+
+    &.vertical {
+      width: @scrollbar-vertical-width;
+      height: 100%;
+      right: 0;
+      top: 0;
+      // for scrollbar-sm vertical.
+      &.scrollbar-sm {
+        width: @scrollbar-vertical-sm-width;
+        .scrollbar {
+          width: (@scrollbar-vertical-sm-width)-(@scrollbar-gutter*2);
+        }
+      }
+      .scrollbar {
+        width: (@scrollbar-vertical-width)-(@scrollbar-gutter*2);
+        height: 20px;
+        background: black;
+        margin-left:@scrollbar-gutter;
+      }
+    }
+
+    position: absolute;
+    background: none;
+    opacity: .1;
+    z-index: 9999;
+    transition: all .4s;
+    &:hover {
+      background: gray;
+      opacity: .6 !important;
+    }
+    &.active {
+      background: gray;
+      opacity: .6 !important;
+    }
+
+  }
+
+  &:hover .scrollbar-container {
+    opacity: .3;
+  }
+}
+
+.content {
+  width: 600px;
+}

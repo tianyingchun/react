@@ -19,11 +19,13 @@ class ScrollBar extends Component {
     realSize: React.PropTypes.number,
     containerSize: React.PropTypes.number,
     position: React.PropTypes.number,
-    type: React.PropTypes.oneOf(['vertical', 'horizontal'])
+    type: React.PropTypes.oneOf(['vertical', 'horizontal']),
+    amSize: React.PropTypes.oneOf(['sm', 'md']) // only small amSize(`sm`) and normal amSize `md` (default)
   }
 
   static defaultProps = {
-    type: 'vertical'
+    type: 'vertical',
+    amSize: 'md'
   }
 
   componentDidMount() {
@@ -48,21 +50,18 @@ class ScrollBar extends Component {
 
   bindedHandleMouseMove = (e) => {
     let { type, containerSize, realSize } = this.props;
+    let multiplier = containerSize / realSize;
 
-    if (type === 'vertical') {
-      let multiplier = containerSize / realSize;
-      if (this.state.isDragging) {
-        Events.preventDefault(e);
+    if (this.state.isDragging) {
+      Events.preventDefault(e);
+
+      if (type === 'vertical') {
         let deltaY = this.state.lastClientPosition - e.clientY;
         this.setState({
           lastClientPosition: e.clientY
         });
         this.props.onMove(deltaY / multiplier, 0);
-      }
-    } else {
-      let multiplier = this.props.containerSize / this.props.realSize;
-      if (this.state.isDragging) {
-        Events.preventDefault(e);
+      } else {
         let deltaX = this.state.lastClientPosition - e.clientX;
         this.setState({
           lastClientPosition: e.clientX
@@ -106,14 +105,16 @@ class ScrollBar extends Component {
   render() {
     let scrollStyle = this.createScrollStyles();
 
-    let scrollbarClasses = classNames(['scrollbar-container', {
+    let scrollbarClasses = [
+      'scrollbar-container',
+      'scrollbar-' + this.props.amSize || 'md', {
       'active': this.state.isDragging,
       'horizontal': this.props.type === 'horizontal',
       'vertical': this.props.type === 'vertical'
-    }]);
+    }];
 
     return (
-      <div className= {scrollbarClasses}>
+      <div className= {classNames(scrollbarClasses)}>
         <div className= "scrollbar" style={scrollStyle} onMouseDown= {this.handleMouseDown} />
       </div>
     );

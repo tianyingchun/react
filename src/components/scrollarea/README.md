@@ -10,6 +10,8 @@ Scrollbars
     contentClassName={String}
     horizontal={Boolean}
     vertical={Boolean}
+    height={Number}
+    width={Number}
     >
 ```
 
@@ -32,3 +34,15 @@ When set to false, horizontal scrollbar will not be available. Default: true
 ### vertical
 
 When set to false, vertical scrollbar will not be available, regardless of the content height. Default: true
+
+### width
+
+The width scrollArea outer container
+
+### height
+
+The height scrollArea outer container
+
+### size
+
+The scrollbar size of scrollArea, optional, only: 'md', 'sm', default is 'md'

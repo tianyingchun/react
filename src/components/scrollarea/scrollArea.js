@@ -10,7 +10,10 @@ class ScrollArea extends Component {
     speed: React.PropTypes.number,
     contentClassName: React.PropTypes.string,
     vertical: React.PropTypes.bool,
-    horizontal: React.PropTypes.bool
+    horizontal: React.PropTypes.bool,
+    height: React.PropTypes.number,
+    width: React.PropTypes.number,
+    amSize: React.PropTypes.oneOf(['sm']) // only small size(sm) and normal size(default)
   }
 
   static defaultProps = {
@@ -44,7 +47,7 @@ class ScrollArea extends Component {
   }
 
   handleMove = (deltaY, deltaX) => {
-    var newState = this.computeSizes();
+    let newState = this.computeSizes();
     if (this.canScrollY(newState)) {
       newState.topPosition = this.computeTopPosition(deltaY, newState);
     }
@@ -55,9 +58,9 @@ class ScrollArea extends Component {
   }
 
   handleWheel = (e) => {
-    var newState = this.computeSizes();
-    var deltaY = e.deltaY * this.props.speed;
-    var deltaX = e.deltaX * this.props.speed;
+    let newState = this.computeSizes();
+    let deltaY = e.deltaY * this.props.speed;
+    let deltaX = e.deltaX * this.props.speed;
 
     if (this.canScrollY(newState)) {
       newState.topPosition = this.computeTopPosition(-deltaY, newState);
@@ -75,7 +78,7 @@ class ScrollArea extends Component {
   }
 
   computeTopPosition(deltaY, sizes) {
-    var newTopPosition = this.state.topPosition + deltaY;
+    let newTopPosition = this.state.topPosition + deltaY;
 
     if (-newTopPosition > sizes.realHeight - sizes.containerHeight) {
       newTopPosition = -(sizes.realHeight - sizes.containerHeight);
@@ -87,7 +90,7 @@ class ScrollArea extends Component {
   }
 
   computeLeftPosition(deltaX, sizes) {
-    var newLeftPosition = this.state.leftPosition + deltaX;
+    let newLeftPosition = this.state.leftPosition + deltaX;
     if (-newLeftPosition > sizes.realWidth - sizes.containerWidth) {
       newLeftPosition = -(sizes.realWidth - sizes.containerWidth);
     } else if (newLeftPosition > 0) {
@@ -98,13 +101,13 @@ class ScrollArea extends Component {
   }
 
   bindedHandleWindowResize = () => {
-    var newState = this.computeSizes();
-    var bottomPosition = newState.realHeight - newState.containerHeight;
+    let newState = this.computeSizes();
+    let bottomPosition = newState.realHeight - newState.containerHeight;
     if (-this.state.topPosition >= bottomPosition) {
       newState.topPosition = this.canScrollY(newState) ? -bottomPosition : 0;
     }
 
-    var rightPosition = newState.realWidth - newState.containerWidth;
+    let rightPosition = newState.realWidth - newState.containerWidth;
     if (-this.state.leftPosition >= rightPosition) {
       newState.leftPosition = this.canScrollX(newState) ? -rightPosition : 0;
     }
@@ -113,12 +116,12 @@ class ScrollArea extends Component {
   }
 
   computeSizes() {
-    var realHeight = React.findDOMNode(this.refs.content).offsetHeight;
-    var containerHeight = React.findDOMNode(this).offsetHeight;
-    var realWidth = React.findDOMNode(this.refs.content).offsetWidth;
-    var containerWidth = React.findDOMNode(this).offsetWidth;
-    var scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
-    var scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
+    let realHeight = React.findDOMNode(this.refs.content).offsetHeight;
+    let containerHeight = React.findDOMNode(this).offsetHeight;
+    let realWidth = React.findDOMNode(this.refs.content).offsetWidth;
+    let containerWidth = React.findDOMNode(this).offsetWidth;
+    let scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
+    let scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
 
     return {
       realHeight: realHeight,
@@ -131,7 +134,7 @@ class ScrollArea extends Component {
   }
 
   setSizesToState() {
-    var sizes = this.computeSizes();
+    let sizes = this.computeSizes();
     if (sizes.realHeight !== this.state.realHeight || sizes.realWidth !== this.state.realWidth) {
       this.setState(sizes);
     }
@@ -158,10 +161,7 @@ class ScrollArea extends Component {
   }
   render() {
 
-    let style = {
-      marginTop: this.state.topPosition,
-      marginLeft: this.state.leftPosition
-    };
+    let { width, height, amSize, className, contentClassName } = this.props;
 
     let { realHeight, containerHeight, topPosition } = this.state;
 
@@ -172,9 +172,9 @@ class ScrollArea extends Component {
           containerSize = {containerHeight}
           position = {-topPosition}
           onMove = {this.handleMove}
-          type = "vertical" />
-      )
-      : null;
+          type = "vertical"
+          amSize ={amSize} />
+      ) : null;
 
     let { realWidth, containerWidth, leftPosition } = this.state;
 
@@ -185,20 +185,29 @@ class ScrollArea extends Component {
         containerSize = {containerWidth}
         position = {-leftPosition}
         onMove = {this.handleMove}
-        type = "horizontal" />
-    ) : null;
+        type = "horizontal"
+        amSize ={amSize} />
+      ) : null;
 
-    let { className, contentClassName } = this.props;
+    let style = {
+      marginTop: this.state.topPosition,
+      marginLeft: this.state.leftPosition
+    };
+
+    let scrollAreaStyle = {
+      width: width,
+      height: height
+    };
 
     let classes = classNames('scrollarea' ,className);
     let contentClasses = classNames('scrollarea-content', contentClassName);
 
     return (
-      <div className = {classes} onWheel = {this.handleWheel}>
-        <div ref= "content" style = { style } className = { contentClasses}>
+      <div className = {classes} style={scrollAreaStyle} onWheel = {this.handleWheel}>
+        <div ref= "content" style={style} className = {contentClasses}>
           {this.props.children}
         </div>
-        { scrollbarY } { scrollbarX }
+        {scrollbarY} {scrollbarX}
       </div>
     );
   }

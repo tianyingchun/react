@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import WorkspaceList from '../components/WorkspaceList';
 import Button from '../../src/components/button';
 import Icon from '../../src/components/icon';
-import ScrollArea from '../../src/components/scrollbar';
+import ScrollArea from '../../src/components/scrollarea';
 
 @connect((state) => ({ workspaces: state.workspaces }))
 class WsList extends Component {
@@ -49,7 +49,7 @@ class WsList extends Component {
 
     // manully dispatch action.
     return (
-      <ScrollArea speed={0.8} className="area" contentClassName="content" horizontal={false}>
+      <ScrollArea speed={0.8} width={400} height={400} className="area" contentClassName="content">
         <p>sdfsf</p>
         <p>sdfsf</p>
         <p>sdfsf</p>

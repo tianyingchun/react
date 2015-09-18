@@ -50,4 +50,7 @@ module.exports = function (grunt) {
   require('./buildtool')(grunt);
 
   grunt.registerTask('server', ['nodemon:server']);
+
+  grunt.registerTask('isomorphic', ['nodemon:isomorphic']);
+
 };

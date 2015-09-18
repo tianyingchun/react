@@ -5,11 +5,11 @@ Scrollbars
 
 ``` html
  <ScrollArea
-        speed={Number}
-        className={String}
-        contentClassName={String}
-        horizontal={Boolean}
-        vertical={Boolean}
+    speed={Number}
+    className={String}
+    contentClassName={String}
+    horizontal={Boolean}
+    vertical={Boolean}
     >
 ```
 

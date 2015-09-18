@@ -68,7 +68,7 @@ class ScrollArea extends Component {
     }
 
     if (this.state.topPosition !== newState.topPosition || this.state.leftPosition !== newState.leftPosition) {
-      e.preventDefault();
+      Events.preventDefault(e);
     }
 
     this.setState(newState);

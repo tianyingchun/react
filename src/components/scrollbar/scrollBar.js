@@ -52,7 +52,7 @@ class ScrollBar extends Component {
     if (type === 'vertical') {
       let multiplier = containerSize / realSize;
       if (this.state.isDragging) {
-        e.preventDefault();
+        Events.preventDefault(e);
         let deltaY = this.state.lastClientPosition - e.clientY;
         this.setState({
           lastClientPosition: e.clientY
@@ -62,7 +62,7 @@ class ScrollBar extends Component {
     } else {
       let multiplier = this.props.containerSize / this.props.realSize;
       if (this.state.isDragging) {
-        e.preventDefault();
+        Events.preventDefault(e);
         let deltaX = this.state.lastClientPosition - e.clientX;
         this.setState({
           lastClientPosition: e.clientX

@@ -8,7 +8,7 @@ let bind = isInBrowser && window.addEventListener ? 'addEventListener' : 'attach
 let unbind = isInBrowser && window.removeEventListener ? 'removeEventListener' : 'detachEvent';
 let prefix = bind !== 'addEventListener' ? 'on' : '';
 
-let events = {
+let Events = {
   one: function (node, eventNames, eventListener) {
     if (!isInBrowser) return;
     let typeArray = eventNames.split(' ');
@@ -60,7 +60,59 @@ let events = {
     if (!isInBrowser) return;
     node[unbind](prefix + eventName, eventListener, capture || false);
     return eventListener;
+  },
+
+  getEvent: function (event) {
+    return event || window.event;
+  },
+
+  getTarget: function (event) {
+    event = Events.getEvent(event);
+    return event.target || event.srcElement;
+  },
+
+  preventDefault: function (event) {
+    event = Events.getEvent(event);
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  },
+
+  stopPropagation: function (event) {
+    event = Events.getEvent(event);
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+  },
+
+  getRelatedTarget: function (event) {
+    event = Events.getEvent(event);
+    if (event.relatedTarget) {
+      return event.relatedTarget;
+    } else {
+      if (event.type == 'mouseover') {
+        return event.fromElement;
+      } else if (event.type == 'mouseout') {
+        return event.toElement;
+      } else {
+        return null;
+      }
+    }
+  },
+
+  getCharCode: function (event) {
+    event = Events.getEvent(event);
+    if (typeof event.charCode == 'number') {
+      return event.charCode;
+    } else {
+      return event.keyCode;
+    }
   }
+
 };
 
-export default events;
+export default Events;

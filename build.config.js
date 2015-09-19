@@ -7,9 +7,9 @@ module.exports = {
     projectRoot: './',
 
     devServer: {
-      host: '172.16.233.137',
+      host: 'localhost',
       port: 3000,
-      publicPath: 'http://172.16.233.137:3000/public/'
+      publicPath: 'http://localhost:3000/public/'
     },
     built: {
       // where the built files should be placed?
@@ -22,7 +22,7 @@ module.exports = {
         context: '${projectName}/stylesheets',
         name: '${projectName}/[path][name].[ext]'
       },
-      dev: 'http://172.16.233.137:3000/public/',
+      dev: 'http://localhost:3000/public/',
       prod: 'http://cdn.xx.com/public/'
     }
   },
@@ -38,7 +38,7 @@ module.exports = {
         routes: './docs/app/routes.js',
         version: '',
         jsBundles: ['browser-polyfill.js', 'reactkits.js', 'docs/reactui/bundle.js${version}'],
-        cssBundles: ['http://172.16.233.137:2000/public/glodon.css','docs/reactui/bundle.css${version}']
+        cssBundles: ['http://localhost:2000/public/glodon.css','docs/reactui/bundle.css${version}']
       }
     }
   }

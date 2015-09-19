@@ -4,6 +4,7 @@ import cors from  'cors';
 import favicon from 'serve-favicon';
 import execTime from 'exec-time';
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { RoutingContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation'
@@ -78,14 +79,12 @@ function handleRender(req, res) {
 
       const InitialView = (
         <Provider store={store}>
-          {() =>
-            <RoutingContext {...renderProps} />
-          }
+          { <RoutingContext {...renderProps} /> }
         </Provider>
       );
 
-      const componentHTML = React.renderToString(InitialView);
-      const head = React.renderToString(React.createFactory(HtmlHead)({ links: cssBundles || [] }));
+      const componentHTML = ReactDOMServer.renderToString(InitialView);
+      const head = ReactDOMServer.renderToString(React.createFactory(HtmlHead)({ links: cssBundles || [] }));
 
       const initialState = store.getState();
 

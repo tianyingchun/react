@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import Router from 'react-router';
 import { history } from '../utils/browser';
@@ -12,9 +13,9 @@ const store = configureStore('home', initialState);
 
 const rootElement = document.getElementById('react-view');
 
-React.render(
+ReactDOM.render(
   <Provider store={ store }>
-    {() => <Router children={ routes() } history={ history } />}
+    {<Router children={ routes() } history={ history } />}
   </Provider>,
   rootElement
 );

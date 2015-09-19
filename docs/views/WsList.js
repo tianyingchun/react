@@ -50,43 +50,47 @@ class WsList extends Component {
 
     // manully dispatch action.
     return (
-      <ScrollArea speed={0.8} width={400} height={400} className="area" amSize={'sm'} contentClassName="content">
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
-        <p>sdfsf</p>
+      <div>
         <DraggableApp />
-        <Button amSize={'sm'} disabled={isLoading} onClick={() => this.action.getExistedWsList({ timeout:5000 })} amStyle={'primary'}>
-          <Icon amStyle={'secondary'} amSize={'sm'} spin={isLoading} icon={'comment'}/>
-          Reload data
-        </Button>
-        <div><Link to="/about">About</Link></div>
-        <DocumentMeta {...meta} />
-        <WorkspaceList workspaces= { workspaces.list || workspaces } />
-      </ScrollArea>
+
+        <ScrollArea speed={0.8} width={400} height={400} className="area" amSize={'sm'} contentClassName="content">
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+          <p>sdfsf</p>
+
+          <Button amSize={'sm'} disabled={isLoading} onClick={() => this.action.getExistedWsList({ timeout:5000 })} amStyle={'primary'}>
+            <Icon amStyle={'secondary'} amSize={'sm'} spin={isLoading} icon={'comment'}/>
+            Reload data
+          </Button>
+          <div><Link to="/about">About</Link></div>
+          <DocumentMeta {...meta} />
+          <WorkspaceList workspaces= { workspaces.list || workspaces } />
+        </ScrollArea>
+      </div>
     );
   }
 }

@@ -8,7 +8,7 @@ module.exports = function baseConfig() {
   return {
     entry: {
       // for convenience, we should always define libaray as react-kits entry.
-      library: ['react', 'react-router', 'redux', 'react-redux', 'redux-logger', 'wurl', 'redux-simple-promise', 'superagent'],
+      library: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-logger', 'wurl', 'redux-simple-promise', 'superagent'],
       // customized module entry definitions.
     },
     module: {

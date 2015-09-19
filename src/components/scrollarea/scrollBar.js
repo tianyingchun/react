@@ -107,7 +107,7 @@ class ScrollBar extends Component {
 
     let scrollbarClasses = [
       'scrollbar-container',
-      'scrollbar-' + this.props.amSize || 'md', {
+      'scrollbar-' + (this.props.amSize) || 'md', {
       'active': this.state.isDragging,
       'horizontal': this.props.type === 'horizontal',
       'vertical': this.props.type === 'vertical'

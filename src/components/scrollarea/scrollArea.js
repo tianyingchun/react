@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Scrollbar from './scrollBar'
 import Events from '../../utils/Events';
@@ -13,7 +14,7 @@ class ScrollArea extends Component {
     horizontal: React.PropTypes.bool,
     height: React.PropTypes.number,
     width: React.PropTypes.number,
-    amSize: React.PropTypes.oneOf(['sm']) // only small size(sm) and normal size(default)
+    amSize: React.PropTypes.oneOf(['sm', 'md']) // only small size(sm) and normal size(default)
   }
 
   static defaultProps = {
@@ -116,10 +117,10 @@ class ScrollArea extends Component {
   }
 
   computeSizes() {
-    let realHeight = React.findDOMNode(this.refs.content).offsetHeight;
-    let containerHeight = React.findDOMNode(this).offsetHeight;
-    let realWidth = React.findDOMNode(this.refs.content).offsetWidth;
-    let containerWidth = React.findDOMNode(this).offsetWidth;
+    let realHeight = this.refs.content.offsetHeight;
+    let containerHeight = ReactDOM.findDOMNode(this).offsetHeight;
+    let realWidth = this.refs.content.offsetWidth;
+    let containerWidth = ReactDOM.findDOMNode(this).offsetWidth;
     let scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
     let scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
 

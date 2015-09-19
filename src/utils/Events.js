@@ -103,7 +103,14 @@ let Events = {
       }
     }
   },
-
+  getWheelDelta: function (event) {
+    event = Events.getEvent(event);
+    if (event.wheelDelta) {
+      return (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);
+    } else {
+      return -event.detail * 40;
+    }
+  },
   getCharCode: function (event) {
     event = Events.getEvent(event);
     if (typeof event.charCode == 'number') {

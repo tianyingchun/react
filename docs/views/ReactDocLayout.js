@@ -6,10 +6,13 @@ class ReactDocLayout extends Component {
     scrollAreaWidth: 220,
     scrollAreaHeight: 400
   }
+  layoutChanged = (data) => {
+    console.log(data);
+  }
   render () {
     return (
       <Layout fill='container'>
-          <Layout layoutWidth={220}>
+          <Layout layoutWidth={220} onLayoutChanged={this.layoutChanged}>
             <ScrollArea speed={0.8} width={this.state.scrollAreaWidth} height={this.state.scrollAreaHeight} amSize={'sm'} contentClassName="content">
               <p>menu</p>
               <p>menu</p>

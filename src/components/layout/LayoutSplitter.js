@@ -19,8 +19,6 @@ export class LayoutSplitter extends Component {
   constructor(props) {
     super(props);
     this.document = props.document || document;
-    // default for desktop.
-    this.isTouchDevice = false;
 
     this.state = {
       active: false
@@ -51,14 +49,6 @@ export class LayoutSplitter extends Component {
     if (events.dragEventFor === events.eventsFor.touch) {
       return e.preventDefault();
     }
-
-    return this.handleDragStart(e);
-  }
-
-  onTouchStart = (e) => {
-    // We're on a touch device now, so change the event handlers
-    // Set isTouchDevice true.
-    this.isTouchDevice = true;
 
     return this.handleDragStart(e);
   }
@@ -139,7 +129,6 @@ export class LayoutSplitter extends Component {
       this.state.newPositionHandler(currentPosition)
     }
   }
-
 
   render() {
     //let orientation = this.props.orientation;

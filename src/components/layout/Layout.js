@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import emptyFunction from 'fbjs/lib/emptyFunction';
 import LayoutSplitter from './LayoutSplitter';
 import dom from '../../utils/dom';
 import events from '../../utils/events';
 import _ from '../../utils/lang';
 
+/**
+ * The flex layout component only suite for desktop,
+ * don't support touch device.
+ */
+
 class Layout extends Component {
 
   static propTypes = {
+    /**
+     * Called when Layout have been changed.
+     */
+    onLayoutChanged: React.PropTypes.func,
     /**
      * By default, we add 'user-select:none' attributes to the document body
      * to prevent ugly text selection during drag. If this is causing problems
@@ -18,7 +28,8 @@ class Layout extends Component {
   }
 
   static defaultProps = {
-    enableUserSelectHack: true
+    enableUserSelectHack: true,
+    onLayoutChanged: emptyFunction
   }
 
   constructor(props) {
@@ -69,7 +80,7 @@ class Layout extends Component {
     this.state.layoutWidth = newWidth;
     this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged();
+      this.props.layoutChanged({layoutWidth: newWidth});
     }
   }
 
@@ -77,11 +88,13 @@ class Layout extends Component {
     this.state.layoutHeight = newHeight;
     this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged();
+      this.props.layoutChanged({layoutHeight:newHeight });
     }
   }
 
-  childLayoutChanged() {
+  childLayoutChanged = (layoutInfo) => {
+    console.log(this.props.onLayoutChanged)
+    this.props.onLayoutChanged(layoutInfo);
     // State hasn't changed but render relies on child properties
     this.setState(this.state);
   }
@@ -165,7 +178,7 @@ class Layout extends Component {
         count++;
         if (child.type === Layout) {
           let newProps = {
-            layoutChanged: this.childLayoutChanged.bind(this),
+            layoutChanged: this.childLayoutChanged,
             calculatedFlexWidth: calculatedFlexDimentions.width,
             calculatedFlexHeight: calculatedFlexDimentions.height,
             containerHeight: height,
@@ -183,7 +196,7 @@ class Layout extends Component {
 
         } else if (child.type === LayoutSplitter) {
           let newProps = {
-            layoutChanged: this.childLayoutChanged.bind(this),
+            layoutChanged: this.childLayoutChanged,
             orientation: calculatedFlexDimentions.orientation,
             containerHeight: height,
             containerWidth: width,

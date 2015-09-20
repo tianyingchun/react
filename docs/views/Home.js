@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
 import DocumentMeta from 'react-document-meta';
-
 if (process.env.BROWSER) {
-  require('../stylesheets/sample-less.less');
+  require('../stylesheets/docs.less');
 }
 
 export default class Home extends Component {
 
   render () {
     const meta = {
-      title: 'SNS Platform',
-      description: 'SNS Platform',
-      canonical: 'http://example.com/product-fashion-women-clothing',
+      title: 'the docs of react ui components',
+      description: 'show user documents for react ui components',
+      canonical: 'http://example.com/docs',
       meta: {
         name: {
-          keywords: 'keywords 1, keywords 3'
+          keywords: 'react ui, react components, react widgets, react component docs'
         }
       }
     };
     return (
-      <div>
-        <DocumentMeta {...meta}/>
-        <div> Home </div>
+      <div className="docs-page">
+        home page.
       </div>
     );
   }

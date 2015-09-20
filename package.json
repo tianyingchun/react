@@ -16,6 +16,7 @@
     "compression": "^1.5.2",
     "cors": "^2.7.1",
     "debug": "^2.2.0",
+    "domready": "^1.0.8",
     "exec-time": "0.0.3",
     "express": "^4.13.3",
     "fbjs": "^0.2.1",

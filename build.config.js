@@ -32,7 +32,7 @@ module.exports = {
       // ${subProjectName}, it contains multi module in business domain.
       reactui: {
         // server rendering url matching.
-        match: /^\/(docs\/|docs)?$/,
+        match: /^\/(docs\/|docs)?/,
         // entry point, must be string.
         entry: './docs/app/index.js',
         routes: './docs/app/routes.js',

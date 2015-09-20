@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
+import * as DocsReducer from './docs';
+
 import * as WsReducers from './workspace';
 
-// The final reducers for workspace list.
+// The final reducers for docs page
 const finalReducers = combineReducers({
-  ...WsReducers
+  ...DocsReducer
 });
 
 export default finalReducers;

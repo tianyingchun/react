@@ -1,16 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router';
-import Header from '../components/Header';
 import NoMatch from '../components/NoMatch';
-import Member from '../views/Member';
-import WsList from '../views/WsList';
+import DocLayout from '../components/DocLayout';
+import Home from '../views/Home';
+import ReactDocLayout from '../views/ReactDocLayout';
+import LessDocLayout from '../views/LessDocLayout';
+
 export default function () {
   return (
-    <Route component={ Header }>
-      <Route path='/(docs)' component={ WsList } />
-      <Route path='/docs/:id/' component={ Member } />
+    <Route component={ DocLayout }>
+      <Route path='/(docs)' component={ Home } />
+      <Route path='/(docs)/less(/:component)' component={ LessDocLayout } />
+      <Route path='/(docs)/react(/:component)' component={ ReactDocLayout } />
       <Redirect from="/" to="/docs" />
-      <Route path="*" component={ NoMatch }/>
+      <Route path="*" component={ NoMatch } />
     </Route>
   );
 }

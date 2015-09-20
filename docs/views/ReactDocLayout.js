@@ -7,7 +7,9 @@ class ReactDocLayout extends Component {
     scrollAreaHeight: 400
   }
   layoutChanged = (data) => {
-    console.log(data);
+    this.setState({
+      scrollAreaWidth: data
+    });
   }
   render () {
     return (

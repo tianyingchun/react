@@ -17,6 +17,8 @@ class Layout extends Component {
   static propTypes = {
     /**
      * Called when Layout have been changed.
+     * @param direction ('vertical', 'horizontal')
+     * @param info (the width or height of current `Layout`)
      */
     onLayoutChanged: React.PropTypes.func,
     /**
@@ -34,7 +36,6 @@ class Layout extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {};
 
     if (props.layoutWidth !== 'flex') {
@@ -76,8 +77,16 @@ class Layout extends Component {
     }
   }
 
+  onNotifyLayoutChanged (direction, info) {
+    if(this.props.onLayoutChanged) {
+      this.props.onLayoutChanged(info);
+    }
+  }
+
   setWidth(newWidth) {
     this.state.layoutWidth = newWidth;
+    // notify layout changed.
+    this.onNotifyLayoutChanged(newWidth);
     this.setState(this.state);
     if (this.props.layoutChanged) {
       this.props.layoutChanged({layoutWidth: newWidth});
@@ -86,15 +95,15 @@ class Layout extends Component {
 
   setHeight(newHeight) {
     this.state.layoutHeight = newHeight;
+    // notify layout changed.
+    this.onNotifyLayoutChanged(newHeight);
     this.setState(this.state);
     if (this.props.layoutChanged) {
       this.props.layoutChanged({layoutHeight:newHeight });
     }
   }
 
-  childLayoutChanged = (layoutInfo) => {
-    console.log(this.props.onLayoutChanged)
-    this.props.onLayoutChanged(layoutInfo);
+  childLayoutChanged = () => {
     // State hasn't changed but render relies on child properties
     this.setState(this.state);
   }

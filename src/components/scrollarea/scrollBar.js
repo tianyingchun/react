@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Events from '../../utils/Events';
+import events from '../../utils/events';
 
 class ScrollBar extends Component {
   constructor(props) {
@@ -29,8 +29,8 @@ class ScrollBar extends Component {
   }
 
   componentDidMount() {
-    Events.on(document, "mousemove", this.bindedHandleMouseMove);
-    Events.on(document, "mouseup", this.bindedHandleMouseUp);
+    events.on(document, "mousemove", this.bindedHandleMouseMove);
+    events.on(document, "mouseup", this.bindedHandleMouseUp);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -38,8 +38,8 @@ class ScrollBar extends Component {
   }
 
   componentWillUnmount() {
-    Events.off(document, "mousemove", this.bindedHandleMouseMove);
-    Events.off(document, "mouseup", this.bindedHandleMouseUp);
+    events.off(document, "mousemove", this.bindedHandleMouseMove);
+    events.off(document, "mouseup", this.bindedHandleMouseUp);
   }
 
   bindedHandleMouseUp = (e) => {
@@ -53,7 +53,7 @@ class ScrollBar extends Component {
     let multiplier = containerSize / realSize;
 
     if (this.state.isDragging) {
-      Events.preventDefault(e);
+      events.preventDefault(e);
 
       if (type === 'vertical') {
         let deltaY = this.state.lastClientPosition - e.clientY;

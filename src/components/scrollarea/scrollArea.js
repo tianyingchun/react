@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Scrollbar from './scrollBar'
-import Events from '../../utils/Events';
+import events from '../../utils/events';
 
 class ScrollArea extends Component {
 
@@ -35,12 +35,12 @@ class ScrollArea extends Component {
   }
 
   componentDidMount() {
-    Events.on(window, "resize", this.bindedHandleWindowResize);
+    events.on(window, "resize", this.bindedHandleWindowResize);
     this.setSizesToState();
   }
 
   componentWillUnmount() {
-    Events.off(window, "resize", this.bindedHandleWindowResize);
+    events.off(window, "resize", this.bindedHandleWindowResize);
   }
 
   componentDidUpdate() {
@@ -72,7 +72,7 @@ class ScrollArea extends Component {
     }
 
     if (this.state.topPosition !== newState.topPosition || this.state.leftPosition !== newState.leftPosition) {
-      Events.preventDefault(e);
+      events.preventDefault(e);
     }
 
     this.setState(newState);

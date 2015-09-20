@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 
 class ReactDocLayout extends Component {
+  state = {
+    scrollAreaWidth: 220,
+    scrollAreaHeight: 400
+  }
   render () {
     return (
       <Layout fill='container'>
           <Layout layoutWidth={220}>
-            <ScrollArea speed={0.8} width={220} height={400} amSize={'sm'} contentClassName="content">
+            <ScrollArea speed={0.8} width={this.state.scrollAreaWidth} height={this.state.scrollAreaHeight} amSize={'sm'} contentClassName="content">
               <p>menu</p>
               <p>menu</p>
               <p>menu</p>

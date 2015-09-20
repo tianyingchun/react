@@ -12,6 +12,24 @@ let docDetailDto = (doc) => {
   }
 };
 
+let docCatalogsDto = (docCatalogs) => {
+  // May be we can do some data transfer here.
+  // ...
+  return {
+    type: DocActionTypes.LOAD_DOC_CATALOGS,
+    payload: docCatalogs
+  }
+};
+
+export function loadDocCatalogs(routerParams) {
+  console.log('action.loadDocCatalogs router params: ', routerParams)
+  return (dispatch, getState) => {
+    return docService.loadDocCatalogs(routerParams)
+      .then(function (result) {
+        dispatch(docDetailDto(result));
+      });
+  };
+};
 //promiseMiddleware, can be attached to component.needs for server async rendering also.
 export function searchDocs(routerParams) {
   console.log('action.searchDocs router params: ', routerParams)
@@ -24,12 +42,12 @@ export function searchDocs(routerParams) {
 };
 
 // thunkMiddleware
-export function getDocDetails(routerParams) {
-  console.log('action.getDocDetails router params: ', routerParams)
+export function loadDocDetail(routerParams) {
+  console.log('action.loadDocDetail router params: ', routerParams)
   return (dispatch, getState) => {
     return docService.loadDocDetail(routerParams)
       .then(function (result) {
-        dispatch(docDetailDto(result));
+        dispatch(docCatalogsDto(result));
       });
   };
 };

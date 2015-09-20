@@ -1,138 +1,168 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
 import LayoutSplitter from './LayoutSplitter';
+import dom from '../../utils/dom';
+import events from '../../utils/events';
+import _ from '../../utils/lang';
 
-export default class Layout extends React.Component {
+class Layout extends Component {
+
+  static propTypes = {
+    /**
+     * By default, we add 'user-select:none' attributes to the document body
+     * to prevent ugly text selection during drag. If this is causing problems
+     * for your app, set this to `false`.
+     */
+    enableUserSelectHack: React.PropTypes.bool
+  }
+
+  static defaultProps = {
+    enableUserSelectHack: true
+  }
+
   constructor(props) {
-    super(props)
-    this.state = {
-      hideSelection: false
-    }
+    super(props);
+
+    this.state = {};
+
     if (props.layoutWidth !== 'flex') {
-      if (props.layoutWidth && !this.isNumber(props.layoutWidth)) {
-        throw new Error('layoutWidth should be a number or flex')
+      if (props.layoutWidth && !_.isNumber(props.layoutWidth)) {
+        throw new Error('layoutWidth should be a number or flex');
       }
-      this.state.layoutWidth = props.layoutWidth
+      this.state.layoutWidth = props.layoutWidth;
     }
     if (props.layoutHeight !== 'flex') {
-      if (props.layoutHeight && !this.isNumber(props.layoutHeight)) {
-        throw new Error('layoutHeight should be a number or flex')
+      if (props.layoutHeight && !_.isNumber(props.layoutHeight)) {
+        throw new Error('layoutHeight should be a number or flex');
       }
-      this.state.layoutHeight = props.layoutHeight
+      this.state.layoutHeight = props.layoutHeight;
     }
 
-    this.handleResize = this.handleResize.bind(this)
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
+    events.on(window, 'resize', this.handleResize);
+    // auto trigger onece.
+    this.handleResize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize)
+    events.off(window, 'resize', this.handleResize);
   }
 
-  handleResize() {
+  handleResize = () => {
     if (this.props.fill === 'window' && window) {
-      this.state.layoutWidth = window.innerWidth
-      this.state.layoutHeight = window.innerHeight
-      this.setState(this.state)
+      this.state.layoutWidth = window.innerWidth;
+      this.state.layoutHeight = window.innerHeight;
+      this.setState(this.state);
+
     } else if (!this.props.layoutWidth && !this.props.layoutHeight) {
       let domNode = ReactDOM.findDOMNode(this)
-      this.state.layoutWidth = domNode.parentElement.clientWidth
-      this.state.layoutHeight = domNode.parentElement.clientHeight
-      this.setState(this.state)
+      this.state.layoutWidth = domNode.parentElement.clientWidth;
+      this.state.layoutHeight = domNode.parentElement.clientHeight;
+      this.setState(this.state);
     }
   }
 
   setWidth(newWidth) {
-    this.state.layoutWidth = newWidth
-    this.setState(this.state)
+    this.state.layoutWidth = newWidth;
+    this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged()
+      this.props.layoutChanged();
     }
   }
 
   setHeight(newHeight) {
-    this.state.layoutHeight = newHeight
-    this.setState(this.state)
+    this.state.layoutHeight = newHeight;
+    this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged()
+      this.props.layoutChanged();
     }
   }
 
   childLayoutChanged() {
     // State hasn't changed but render relies on child properties
-    this.setState(this.state)
+    this.setState(this.state);
   }
 
   recalculateFlexLayout() {
-    let newFlexDimentions = {}
+    let newFlexDimentions = {};
     if (this.props.children) {
-      let numberOfFlexWidths = 0
-      let totalAllocatedWidth = 0
-      let numberOfFlexHeights = 0
-      let totalAllocatedHeight = 0
-      let i = 0
+      let numberOfFlexWidths = 0;
+      let totalAllocatedWidth = 0;
+      let numberOfFlexHeights = 0;
+      let totalAllocatedHeight = 0;
+      let i = 0;
       React.Children.map(this.props.children, childDefinition => {
-        var childType = childDefinition.type
+        var childType = childDefinition.type;
         if (childType === Layout && !childDefinition.props.layoutWidth && !childDefinition.props.layoutHeight) {
-          throw new Error('Child Layouts must have either layoutWidth or layoutHeight set')
+          throw new Error('Child Layouts must have either layoutWidth or layoutHeight set');
         }
 
         if (childType === Layout || childType === LayoutSplitter) {
-          let child = this.refs['layout' + i]
-          if (childDefinition.props.layoutWidth === 'flex') { numberOfFlexWidths++ }
-          else if (!child && this.isNumber(childDefinition.props.layoutWidth)) { totalAllocatedWidth += childDefinition.props.layoutWidth }
-          else if (child && this.isNumber(child.state.layoutWidth)) { totalAllocatedWidth += child.state.layoutWidth }
+          let child = this.refs['layout' + i];
 
-          if (childDefinition.props.layoutHeight === 'flex') { numberOfFlexHeights++ }
-          else if (!child && this.isNumber(childDefinition.props.layoutHeight)) { totalAllocatedHeight += childDefinition.props.layoutHeight }
-          else if (child && this.isNumber(child.state.layoutHeight)) { totalAllocatedHeight += child.state.layoutHeight }
+          //horizontal
+          if (childDefinition.props.layoutWidth === 'flex') {
+            numberOfFlexWidths++;
+          } else if (!child && _.isNumber(childDefinition.props.layoutWidth)) {
+            totalAllocatedWidth += childDefinition.props.layoutWidth;
+          } else if (child && _.isNumber(child.state.layoutWidth)) {
+            totalAllocatedWidth += child.state.layoutWidth;
+          }
+
+          //vertical
+          if (childDefinition.props.layoutHeight === 'flex') {
+            numberOfFlexHeights++;
+          } else if (!child && _.isNumber(childDefinition.props.layoutHeight)) {
+            totalAllocatedHeight += childDefinition.props.layoutHeight;
+          } else if (child && _.isNumber(child.state.layoutHeight)) {
+            totalAllocatedHeight += child.state.layoutHeight;
+          }
         }
-        i++
-      })
+        i++;
+      });
 
       if (numberOfFlexHeights > 0 && numberOfFlexWidths > 0) {
-        throw new Error('Cannot have layout children with both flex widths and heights')
+        throw new Error('Cannot have layout children with both flex widths and heights');
       }
       if (numberOfFlexWidths > 0) {
-        var thisWidth = this.state.layoutWidth || this.props.containerWidth
-        newFlexDimentions.width = (thisWidth - totalAllocatedWidth) / numberOfFlexWidths
+        var thisWidth = this.state.layoutWidth || this.props.containerWidth;
+        newFlexDimentions.width = (thisWidth - totalAllocatedWidth) / numberOfFlexWidths;
       } else if (numberOfFlexHeights > 0) {
-        var thisHeight = this.state.layoutHeight || this.props.containerHeight
-        newFlexDimentions.height = (thisHeight - totalAllocatedHeight) / numberOfFlexHeights
+        var thisHeight = this.state.layoutHeight || this.props.containerHeight;
+        newFlexDimentions.height = (thisHeight - totalAllocatedHeight) / numberOfFlexHeights;
       }
 
-      let isHorizontal = numberOfFlexWidths > 0 || totalAllocatedWidth > 0
-      let isVertical = numberOfFlexHeights > 0 || totalAllocatedHeight > 0
+      let isHorizontal = numberOfFlexWidths > 0 || totalAllocatedWidth > 0;
+      let isVertical = numberOfFlexHeights > 0 || totalAllocatedHeight > 0;
       if (isHorizontal && isVertical) {
         throw new Error('You can only specify layoutHeight or layoutWidth at a single level')
       } else if (isHorizontal) {
-        newFlexDimentions.orientation = 'horizontal'
+        newFlexDimentions.orientation = 'horizontal';
       } else if (isVertical) {
-        newFlexDimentions.orientation = 'vertical'
+        newFlexDimentions.orientation = 'vertical';
       }
     }
 
-    return newFlexDimentions
+    return newFlexDimentions;
   }
 
   render() {
-    let width = this.props.layoutWidth === 'flex' ? this.props.calculatedFlexWidth : (this.state.layoutWidth || this.props.containerWidth)
-    let height = this.props.layoutHeight === 'flex' ? this.props.calculatedFlexHeight : (this.state.layoutHeight || this.props.containerHeight)
+    let width = this.props.layoutWidth === 'flex' ? this.props.calculatedFlexWidth : (this.state.layoutWidth || this.props.containerWidth);
+    let height = this.props.layoutHeight === 'flex' ? this.props.calculatedFlexHeight : (this.state.layoutHeight || this.props.containerHeight);
 
     if (!width || !height) {
       // We don't know our size yet (maybe initial render)
-      return <div />
+      return <div />;
     }
-    let count = -1
-    let calculatedFlexDimentions = this.recalculateFlexLayout()
+    let count = -1;
+    let calculatedFlexDimentions = this.recalculateFlexLayout();
     let children = React.Children.map(
       this.props.children,
       child => {
-        count++
+        count++;
         if (child.type === Layout) {
           let newProps = {
             layoutChanged: this.childLayoutChanged.bind(this),
@@ -141,14 +171,16 @@ export default class Layout extends React.Component {
             containerHeight: height,
             containerWidth: width,
             ref: 'layout' + count
-          }
+          };
+
           if (calculatedFlexDimentions.orientation === 'horizontal') {
-            let childStyle = child.props.style || {}
-            childStyle.float = 'left'
-            newProps.style = childStyle
+            let childStyle = child.props.style || {};
+            childStyle.float = 'left';
+            newProps.style = childStyle;
           }
-          let cloned = React.cloneElement(child, newProps)
-          return cloned
+
+          return  React.cloneElement(child, newProps);
+
         } else if (child.type === LayoutSplitter) {
           let newProps = {
             layoutChanged: this.childLayoutChanged.bind(this),
@@ -157,64 +189,72 @@ export default class Layout extends React.Component {
             containerWidth: width,
             ref: 'layout' + count,
             hideSelection: () => {
-              this.setState({ hideSelection: true })
+              this.addUserSelectStyles();
             },
             restoreSelection: () => {
-              this.clearSelection()
-              this.setState({ hideSelection: false })
+              this.removeUserSelectStyles();
             },
             getPreviousLayout: () => {
-              let index = this.props.children.indexOf(child)
-              return this.refs['layout' + (index - 1)]
+              let index = this.props.children.indexOf(child);
+              return this.refs['layout' + (index - 1)];
             },
             getNextLayout: () => {
-              let index = this.props.children.indexOf(child)
-              return this.refs['layout' + (index + 1)]
+              let index = this.props.children.indexOf(child);
+              return this.refs['layout' + (index + 1)];
             }
           }
-          let cloned = React.cloneElement(child, newProps)
-          return cloned
-        }
-        return child
-      })
+          return React.cloneElement(child, newProps);
+        };
+        return child;
+      });
 
-    let className = null
-    if (this.props.className) {
-      className = this.props.className
-    }
-    if (this.state.hideSelection) {
-      if (className) { className += ' ' }
-      className += 'hideSelection'
-    }
-    let style = this.props.style || {}
-    style.overflow = 'auto'
-    style.width = width
-    style.height = height
+    let className = {
+      [this.props.className]: !!this.props.className
+    };
+
+    let style = Object.assign({}, this.props.style || {}, {
+      overflow: 'auto',
+      width: width,
+      height: height
+    });
+
     if (this.props.fill === 'window') {
-      style.position = 'absolute'
-      style.top = 0
-      style.left = 0
+      Object.assign(style, {
+        position:'absolute',
+        top: 0,
+        left: 0
+      });
     }
-    return <div style={style} className={className}>{children}</div>
+
+    return <div style={style} className={classNames(className)}>{children}</div>;
   }
 
-  isNumber(value) {
-    return typeof value === 'number';
-  }
-
-  clearSelection() {
-    if (window.getSelection) {
-      if (window.getSelection().empty) {  // Chrome
-        window.getSelection().empty();
-      } else if (window.getSelection().removeAllRanges) {  // Firefox
-        window.getSelection().removeAllRanges();
-      }
-    } else if (document.selection) {  // IE?
-      document.selection.empty();
+  /**
+   * add 'user-select:none' attributes to the document body
+   * to prevent ugly text selection during drag.
+   */
+  addUserSelectStyles = () => {
+    if (this.props.enableUserSelectHack) {
+      let style = document.body.getAttribute('style') || '';
+      document.body.setAttribute('style', style + dom.selectStyle());
+    } else {
+      console.warn('UserSelectHack is not enabled');
     }
   }
-}
+  /**
+   * remove 'user-select:none' attributes to the document body
+   * to prevent ugly text selection during drag.
+   */
+  removeUserSelectStyles = () => {
+    if (this.props.enableUserSelectHack) {
+      let style = document.body.getAttribute('style') || '';
+      document.body.setAttribute('style', style.replace(dom.selectStyle(), ''));
+    }
+    else {
+      console.warn('UserSelectHack is not enabled');
+    }
+  }
 
-Layout.propTypes = {
-  hideSelection: React.PropTypes.bool
 }
+export default Layout;
+

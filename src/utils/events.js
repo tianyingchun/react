@@ -8,8 +8,8 @@ let bind = isInBrowser && window.addEventListener ? 'addEventListener' : 'attach
 let unbind = isInBrowser && window.removeEventListener ? 'removeEventListener' : 'detachEvent';
 let prefix = bind !== 'addEventListener' ? 'on' : '';
 
-let Events = {
-  one: function (node, eventNames, eventListener) {
+class Events {
+  static one (node, eventNames, eventListener) {
     if (!isInBrowser) return;
     let typeArray = eventNames.split(' ');
     let recursiveFunction = function (e) {
@@ -20,7 +20,7 @@ let Events = {
     for (let i = typeArray.length - 1; i >= 0; i--) {
       this.on(node, typeArray[i], recursiveFunction);
     }
-  },
+  }
 
 
   /**
@@ -34,7 +34,7 @@ let Events = {
    * @api public
    */
 
-  on: function (node, eventName, eventListener, capture) {
+  static on (node, eventName, eventListener, capture) {
     if (!isInBrowser) return;
     node[bind](prefix + eventName, eventListener, capture || false);
     return {
@@ -42,7 +42,7 @@ let Events = {
         node[unbind](prefix + eventName, eventListener, capture || false);
       }
     };
-  },
+  }
 
 
   /**
@@ -56,40 +56,40 @@ let Events = {
    * @api public
    */
 
-  off: function (node, eventName, eventListener, capture) {
+  static off (node, eventName, eventListener, capture) {
     if (!isInBrowser) return;
     node[unbind](prefix + eventName, eventListener, capture || false);
     return eventListener;
-  },
+  }
 
-  getEvent: function (event) {
+  static getEvent (event) {
     return event || window.event;
-  },
+  }
 
-  getTarget: function (event) {
+  static getTarget (event) {
     event = Events.getEvent(event);
     return event.target || event.srcElement;
-  },
+  }
 
-  preventDefault: function (event) {
+  static preventDefault (event) {
     event = Events.getEvent(event);
     if (event.preventDefault) {
       event.preventDefault();
     } else {
       event.returnValue = false;
     }
-  },
+  }
 
-  stopPropagation: function (event) {
+  static stopPropagation (event) {
     event = Events.getEvent(event);
     if (event.stopPropagation) {
       event.stopPropagation();
     } else {
       event.cancelBubble = true;
     }
-  },
+  }
 
-  getRelatedTarget: function (event) {
+  static getRelatedTarget (event) {
     event = Events.getEvent(event);
     if (event.relatedTarget) {
       return event.relatedTarget;
@@ -102,16 +102,18 @@ let Events = {
         return null;
       }
     }
-  },
-  getWheelDelta: function (event) {
+  }
+
+  static getWheelDelta (event) {
     event = Events.getEvent(event);
     if (event.wheelDelta) {
       return (client.engine.opera && client.engine.opera < 9.5 ? -event.wheelDelta : event.wheelDelta);
     } else {
       return -event.detail * 40;
     }
-  },
-  getCharCode: function (event) {
+  }
+
+  static getCharCode (event) {
     event = Events.getEvent(event);
     if (typeof event.charCode == 'number') {
       return event.charCode;
@@ -119,7 +121,27 @@ let Events = {
       return event.keyCode;
     }
   }
+  /**
+   * simple abstraction for dragging events names
+   *
+   */
+  static eventsFor = {
+    mouse: {
+      start: 'mousedown',
+      move: 'mousemove',
+      end: 'mouseup'
+    },
+    touch: {
+      start: 'touchstart',
+      move: 'touchmove',
+      end: 'touchend'
+    }
+  }
 
+  // Default to mouse events
+  static dragEventFor(isTouchDevice) {
+    return isTouchDevice ? Events.eventsFor.touch : Events.eventsFor.mouse;
+  }
 };
 
 export default Events;

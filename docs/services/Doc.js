@@ -39,6 +39,25 @@ class Doc extends WebAPI {
       }, query.timeout || 0);
     });
   }
+  /**
+   * Load current doc catalogs.
+   * @param  {Object} query doc catalogs
+   * @return {Array<DocCatalogItem>}
+   */
+  loadDocCatalogs = (query) => {
+    console.log('service: loadDocCatalogs query:', query);
+    return new Promise((resolve, reject)) => {
+      setTimeout(() => {
+        resolve([{
+          guide: 'the is guide',
+          code: 'this is coce'
+        }, {
+          guide: 'the is guide',
+          code: 'this is coce'
+        }]);
+      }, query.timeout || 0);
+    });
+  }
 }
 
 export default Doc;

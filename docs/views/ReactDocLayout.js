@@ -26,7 +26,7 @@ class ReactDocLayout extends React.Component {
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
-      layoutWidthFlex: (layoutWidth || this.state.layoutWidthFlex)-11,
+      layoutWidthFlex: layoutWidth || this.state.layoutWidthFlex,
       layoutHeightFlex: layoutHeight || this.state.layoutHeightFlex
     };
 

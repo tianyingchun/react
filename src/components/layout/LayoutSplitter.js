@@ -21,12 +21,15 @@ export class LayoutSplitter extends React.Component {
 
   componentDidMount() {
     let { splitterSize, orientation, layoutWidth, layoutHeight, layoutChanged } = this.props;
-
+    // The weight of splitter.
+    let splitterWeight = 11;
     if (orientation === 'horizontal') {
-      this.state.layoutWidth = layoutWidth || 11;
+      this.props.layoutWidth = this.props.layoutWidth || splitterWeight;
+      this.state.layoutWidth = layoutWidth || splitterWeight;
       layoutChanged();
     } else if (orientation === 'vertical') {
-      this.state.layoutHeight = layoutHeight || 11;
+      this.props.layoutHeight = this.props.layoutHeight || splitterWeight;
+      this.state.layoutHeight = layoutHeight || splitterWeight;
       layoutChanged();
     }
   }

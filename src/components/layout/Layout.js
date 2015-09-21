@@ -205,6 +205,7 @@ class Layout extends React.Component {
   }
 
   render() {
+
     let width = this.getWidth();
     let height = this.getHeight();
 

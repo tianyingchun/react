@@ -524,9 +524,9 @@ class Draggable extends React.Component {
       style.zIndex = this.props.zIndex;
     }
 
-    let className = classNames((this.props.children.props.className || ''), 'react-draggable', {
-      'react-draggable-dragging': this.state.dragging,
-      'react-draggable-dragged': this.state.dragged
+    let className = classNames((this.props.children.props.className || ''), 'draggable', {
+      'draggable-dragging': this.state.dragging,
+      'draggable-dragged': this.state.dragged
     });
 
     // Reuse the child provided

@@ -7,11 +7,7 @@ class ReactDocLayout extends React.Component {
     layoutWidth: 220,
     layoutHeight: 400
   }
-  addContent =()=> {
-    this.setState(Object.assign({}, this.state, {
-      content: this.state.content+'\ndddddd'
-    }));
-  }
+
   layoutChanged = (layoutInfo) => {
     // console.log('layoutInfo',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});

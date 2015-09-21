@@ -1,4 +1,6 @@
 let platform = () => {
+  // for server rendering.
+  if (typeof navigator ==='undefined') return {};
   let ua = navigator.userAgent.toLowerCase();
 
   let match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||

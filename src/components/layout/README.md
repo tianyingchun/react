@@ -5,4 +5,5 @@ The most important component. Everything else is composed out of <Layout/> compo
 When to use
 ----------
 https://github.com/Zinggi/RLayout
+https://github.com/AdaptiveConsulting/react-flex-layout
 

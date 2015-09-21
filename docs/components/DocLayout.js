@@ -28,14 +28,6 @@ class DocLayout extends React.Component {
         </Layout>
       </div>
     );
-    // return (
-    //   <div className="wrapper">
-    //     <DocumentMeta {...meta} />
-    //     <Layout fill='window'>
-    //     dddd
-    //     </Layout>
-    //   </div>
-    // );
   }
 }
 

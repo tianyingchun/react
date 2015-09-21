@@ -65,14 +65,16 @@ class Layout extends React.Component {
 
   handleResize = () => {
     if (this.props.fill === 'window' && window) {
-      this.state.layoutWidth = window.innerWidth;
-      this.state.layoutHeight = window.innerHeight;
+      // for ie8, ie9.
+      this.state.layoutWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      this.state.layoutHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
       this.setState(this.state);
 
     } else if (!this.props.layoutWidth && !this.props.layoutHeight) {
       let domNode = ReactDOM.findDOMNode(this)
       this.state.layoutWidth = domNode.parentElement.clientWidth;
       this.state.layoutHeight = domNode.parentElement.clientHeight;
+
       this.setState(this.state);
     }
     this.onNotifyLayoutChanged({
@@ -194,7 +196,6 @@ class Layout extends React.Component {
   render() {
     let width = this.getWidth();
     let height = this.getHeight();
-
     if (!width || !height) {
       // We don't know our size yet (maybe initial render)
       return <div />;

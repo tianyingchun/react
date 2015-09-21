@@ -65,37 +65,37 @@ export class LayoutSplitter extends React.Component {
 
     if (layout1 && layout2) {
       this.props.hideSelection();
-      let isLayout1Flex = layout1.props[layoutProp] === 'flex'
-      let isLayout2Flex = layout2.props[layoutProp] === 'flex'
-      let newPositionHandler
+      let isLayout1Flex = layout1.props[layoutProp] === 'flex';
+      let isLayout2Flex = layout2.props[layoutProp] === 'flex';
+      let newPositionHandler;
 
       if (isLayout1Flex && isLayout2Flex) {
         throw new Error('Do not support resizing two flex Layouts')
-      } else if (isLayout1Flex) {
-        // Layout 2 has fixed size
-        let originalSize = layout2.state[layoutProp]
-        newPositionHandler = (currentPosition) => {
-          let delta = downPosition - currentPosition
-          let newSize = originalSize + delta
-          layout2[updateFunctionName](newSize)
-        }
-      } else if (isLayout2Flex) {
+      } else if (isLayout1Flex || isLayout2Flex) {
+
         // Layout 1 has fixed size
-        let originalSize = layout1.state[layoutProp]
+        let originalSize1 = layout1.state[layoutProp];
+
+        let originalSize2 = layout2.state[layoutProp];
+
         newPositionHandler = (currentPosition) => {
-          let delta = currentPosition - downPosition
-          let newSize = originalSize + delta
-          layout1[updateFunctionName](newSize)
+          let delta1 = currentPosition - downPosition;
+          let newSize1 = originalSize1 + delta1;
+          layout1[updateFunctionName](newSize1);
+
+          let delta2 = downPosition - currentPosition;
+          let newSize2 = originalSize2 + delta2;
+          layout2[updateFunctionName](newSize2);
         }
       }
       else {
         // Both are fixed width
-        let originalSize1 = layout1.state[layoutProp]
-        let originalSize2 = layout2.state[layoutProp]
+        let originalSize1 = layout1.state[layoutProp];
+        let originalSize2 = layout2.state[layoutProp];
         newPositionHandler = (currentPosition) => {
-          let delta = currentPosition - downPosition
-          layout1[updateFunctionName](originalSize1 + delta)
-          layout2[updateFunctionName](originalSize2 - delta)
+          let delta = currentPosition - downPosition;
+          layout1[updateFunctionName](originalSize1 + delta);
+          layout2[updateFunctionName](originalSize2 - delta);
         }
       }
 

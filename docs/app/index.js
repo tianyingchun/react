@@ -13,9 +13,10 @@ const store = configureStore('home', initialState);
 
 const rootElement = document.getElementById('react-view');
 
+//https://github.com/rackt/react-router/blob/master/UPGRADE_GUIDE.md#state-mixin
 ReactDOM.render(
   <Provider store={ store }>
-    {<Router children={ routes() } history={ history } />}
+    {<Router history={ history }>{routes()}</Router>}
   </Provider>,
   rootElement
 );

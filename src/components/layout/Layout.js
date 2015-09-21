@@ -77,6 +77,7 @@ class Layout extends React.Component {
 
       this.setState(this.state);
     }
+
     this.onNotifyLayoutChanged({
       layoutWidth: this.getWidth(),
       layoutHeight: this.getHeight()
@@ -114,15 +115,25 @@ class Layout extends React.Component {
   }
 
   getWidth() {
-    return  this.props.layoutWidth === 'flex'
-      ? this.props.calculatedFlexWidth
-      : (this.state.layoutWidth || this.props.containerWidth);
+    if (this.props.layoutWidth === 'flex') {
+      this.state.layoutWidth = this.props.calculatedFlexWidth;
+    }
+    return this.state.layoutWidth || this.props.containerWidth;
+
+    // return  this.props.layoutWidth === 'flex'
+    //   ? this.props.calculatedFlexWidth
+    //   : (this.state.layoutWidth || this.props.containerWidth);
   }
 
   getHeight() {
-    return this.props.layoutHeight === 'flex'
-      ? this.props.calculatedFlexHeight
-      : (this.state.layoutHeight || this.props.containerHeight);
+    if (this.props.layoutHeight === 'flex') {
+      this.state.layoutHeight = this.props.calculatedFlexHeight;
+    }
+    return this.state.layoutHeight || this.props.containerHeight;
+
+    // return this.props.layoutHeight === 'flex'
+    //   ? this.props.calculatedFlexHeight
+    //   : (this.state.layoutHeight || this.props.containerHeight);
   }
 
   childLayoutChanged = () => {
@@ -196,10 +207,12 @@ class Layout extends React.Component {
   render() {
     let width = this.getWidth();
     let height = this.getHeight();
+
     if (!width || !height) {
       // We don't know our size yet (maybe initial render)
       return <div />;
     }
+
     let count = -1;
     let calculatedFlexDimentions = this.recalculateFlexLayout();
     let children = React.Children.map(

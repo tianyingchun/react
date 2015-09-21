@@ -5,16 +5,29 @@ import { default as DraggableDemo } from '../../src/components/draggable/demo';
 class ReactDocLayout extends React.Component {
   state = {
     layoutWidth: 220,
-    layoutHeight: 400
+    layoutHeight: 400,
+    layoutWidthFlex: 0,
+    layoutHeightFlex: 0
   }
 
   layoutChanged = (layoutInfo) => {
-    // console.log('layoutInfo',layoutInfo)
+    console.log('layoutInfo',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
       layoutWidth: layoutWidth || this.state.layoutWidth,
       layoutHeight: layoutHeight || this.state.layoutHeight
+    };
+
+    this.setState(newState);
+  }
+  layoutChangedFlex = (layoutInfo) => {
+    console.log('layoutInfoFlex',layoutInfo)
+    let { layoutWidth, layoutHeight } = (layoutInfo || {});
+
+    let newState = {
+      layoutWidthFlex: (layoutWidth || this.state.layoutWidthFlex)-11,
+      layoutHeightFlex: layoutHeight || this.state.layoutHeightFlex
     };
 
     this.setState(newState);
@@ -29,7 +42,12 @@ class ReactDocLayout extends React.Component {
         break;
     }
     return (
-      <Layout fill='container'>
+      <Layout className="row" fill='container'>
+       <Layout layoutWidth={50}>
+       <p>icon 1</p>
+       <p>icon 2</p>
+       <p>icon 3</p>
+       </Layout>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
             <ScrollArea speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
               <ul className="nav nav-left-dock">
@@ -41,8 +59,10 @@ class ReactDocLayout extends React.Component {
             </ScrollArea>
           </Layout>
           <LayoutSplitter />
-          <Layout layoutWidth='flex'>
-            {example}
+          <Layout layoutWidth='flex' onLayoutChanged={this.layoutChangedFlex}>
+            <ScrollArea speed={0.8} width={this.state.layoutWidthFlex} height={this.state.layoutHeightFlex} amSize={'sm'} contentClassName="content">
+              {example}
+            </ScrollArea>
           </Layout>
       </Layout>
     );

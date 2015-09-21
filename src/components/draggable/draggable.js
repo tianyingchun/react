@@ -1,5 +1,5 @@
 /* eslint react/no-set-state:0  */
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Helpers from './helpers/index';
@@ -7,7 +7,7 @@ import emptyFunction from 'fbjs/lib/emptyFunction';
 
 //
 // Define <Draggable>
-class Draggable extends Component {
+class Draggable extends React.Component {
 
   static propTypes = {
     /**

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 
-class LessDocLayout extends Component {
+class LessDocLayout extends React.Component {
   render () {
     return (
       <Layout fill='container'>

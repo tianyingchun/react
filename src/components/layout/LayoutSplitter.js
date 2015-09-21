@@ -1,19 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import events from '../../utils/events';
 import classNames from 'classnames';
-export class LayoutSplitter extends Component {
+export class LayoutSplitter extends React.Component {
 
   static propTypes = {
     orientation: PropTypes.string,
     hideSelection: PropTypes.func,
     getPreviousLayout: PropTypes.func,
-    getNextLayout: PropTypes.func,
-    splitterSize: PropTypes.number
-  }
-
-  static defaultProps = {
-    // the splitter vertical height, horizontal width (px).
-    splitterSize: 11
+    getNextLayout: PropTypes.func
   }
 
   constructor(props) {
@@ -29,10 +23,10 @@ export class LayoutSplitter extends Component {
     let { splitterSize, orientation, layoutWidth, layoutHeight, layoutChanged } = this.props;
 
     if (orientation === 'horizontal') {
-      this.state.layoutWidth = layoutWidth || splitterSize;
+      this.state.layoutWidth = layoutWidth || 11;
       layoutChanged();
     } else if (orientation === 'vertical') {
-      this.state.layoutHeight = layoutHeight || splitterSize;
+      this.state.layoutHeight = layoutHeight || 11;
       layoutChanged();
     }
   }

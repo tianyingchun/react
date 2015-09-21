@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import emptyFunction from 'fbjs/lib/emptyFunction';
@@ -12,7 +12,7 @@ import _ from '../../utils/lang';
  * don't support touch device.
  */
 
-class Layout extends Component {
+class Layout extends React.Component {
 
   static propTypes = {
     /**
@@ -75,32 +75,52 @@ class Layout extends Component {
       this.state.layoutHeight = domNode.parentElement.clientHeight;
       this.setState(this.state);
     }
+    this.onNotifyLayoutChanged({
+      layoutWidth: this.getWidth(),
+      layoutHeight: this.getHeight()
+    });
   }
 
-  onNotifyLayoutChanged (direction, info) {
+  /**
+   * The layout information notification
+   * @param  {Object} The {layoutWidth, layoutHeight}
+   */
+  onNotifyLayoutChanged (layoutInfo) {
     if(this.props.onLayoutChanged) {
-      this.props.onLayoutChanged(info);
+      this.props.onLayoutChanged(layoutInfo);
     }
   }
 
   setWidth(newWidth) {
     this.state.layoutWidth = newWidth;
     // notify layout changed.
-    this.onNotifyLayoutChanged(newWidth);
+    this.onNotifyLayoutChanged({layoutWidth: newWidth});
     this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged({layoutWidth: newWidth});
+      this.props.layoutChanged();
     }
   }
 
   setHeight(newHeight) {
     this.state.layoutHeight = newHeight;
     // notify layout changed.
-    this.onNotifyLayoutChanged(newHeight);
+    this.onNotifyLayoutChanged({layoutHeight: newHeight});
     this.setState(this.state);
     if (this.props.layoutChanged) {
-      this.props.layoutChanged({layoutHeight:newHeight });
+      this.props.layoutChanged();
     }
+  }
+
+  getWidth() {
+    return  this.props.layoutWidth === 'flex'
+      ? this.props.calculatedFlexWidth
+      : (this.state.layoutWidth || this.props.containerWidth);
+  }
+
+  getHeight() {
+    return this.props.layoutHeight === 'flex'
+      ? this.props.calculatedFlexHeight
+      : (this.state.layoutHeight || this.props.containerHeight);
   }
 
   childLayoutChanged = () => {
@@ -172,8 +192,8 @@ class Layout extends Component {
   }
 
   render() {
-    let width = this.props.layoutWidth === 'flex' ? this.props.calculatedFlexWidth : (this.state.layoutWidth || this.props.containerWidth);
-    let height = this.props.layoutHeight === 'flex' ? this.props.calculatedFlexHeight : (this.state.layoutHeight || this.props.containerHeight);
+    let width = this.getWidth();
+    let height = this.getHeight();
 
     if (!width || !height) {
       // We don't know our size yet (maybe initial render)
@@ -235,7 +255,9 @@ class Layout extends Component {
     };
 
     let style = Object.assign({}, this.props.style || {}, {
-      overflow: 'auto',
+      // Note. normally we should using scrollArea component to each layout container
+      // So set overflow: hidden;
+      overflow: 'hidden',
       width: width,
       height: height
     });

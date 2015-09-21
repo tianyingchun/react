@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Scrollbar from './scrollBar'
 import events from '../../utils/events';
 
-class ScrollArea extends Component {
+class ScrollArea extends React.Component {
 
   static propTypes = {
     className: React.PropTypes.string,
@@ -12,7 +12,9 @@ class ScrollArea extends Component {
     contentClassName: React.PropTypes.string,
     vertical: React.PropTypes.bool,
     horizontal: React.PropTypes.bool,
+    // the width of scrollArea container, can be set via Layout dynamicly.
     height: React.PropTypes.number,
+    // the height of scrollArea container, can be set via Layout dynamicly.
     width: React.PropTypes.number,
     amSize: React.PropTypes.oneOf(['sm', 'md']) // only small size(sm) and normal size(default)
   }
@@ -44,6 +46,10 @@ class ScrollArea extends Component {
   }
 
   componentDidUpdate() {
+    this.setSizesToState();
+  }
+
+  componentWillReceiveProps (nextProps) {
     this.setSizesToState();
   }
 
@@ -123,7 +129,6 @@ class ScrollArea extends Component {
     let containerWidth = ReactDOM.findDOMNode(this).offsetWidth;
     let scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
     let scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
-
     return {
       realHeight: realHeight,
       containerHeight: containerHeight,
@@ -136,7 +141,11 @@ class ScrollArea extends Component {
 
   setSizesToState() {
     let sizes = this.computeSizes();
-    if (sizes.realHeight !== this.state.realHeight || sizes.realWidth !== this.state.realWidth) {
+    if (sizes.realHeight !== this.state.realHeight
+      || sizes.realWidth !== this.state.realWidth
+      || sizes.containerHeight !== this.state.containerHeight
+      || sizes.containerWidth !== this.state.containerWidth) {
+
       this.setState(sizes);
     }
   }
@@ -161,7 +170,6 @@ class ScrollArea extends Component {
     return state.scrollableX && this.props.horizontal;
   }
   render() {
-
     let { width, height, amSize, className, contentClassName } = this.props;
 
     let { realHeight, containerHeight, topPosition } = this.state;

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class WorkspaceItem extends Component {
+class WorkspaceItem extends React.Component {
   render () {
     const { workspace } = this.props;
     return (

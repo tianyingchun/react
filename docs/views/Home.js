@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DocumentMeta from 'react-document-meta';
 if (process.env.BROWSER) {
   require('../stylesheets/docs.less');
 }
 
-export default class Home extends Component {
+export default class Home extends React.Component {
 
   render () {
     const meta = {

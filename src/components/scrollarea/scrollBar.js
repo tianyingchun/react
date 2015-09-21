@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import events from '../../utils/events';
 
-class ScrollBar extends Component {
+class ScrollBar extends React.Component {
   constructor(props) {
     super(props);
     let newState = this.calculateState(props);

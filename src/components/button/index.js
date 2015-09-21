@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import mixin from '../../utils/mixin';
 import classNames from 'classnames';
 import omit from 'object.omit';

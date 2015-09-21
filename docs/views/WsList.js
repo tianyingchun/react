@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as WsListActions from '../actions/WsListActions';
@@ -11,7 +11,7 @@ import ScrollArea from '../../src/components/scrollarea';
 import DraggableApp from '../../src/components/draggable/demo';
 
 @connect((state) => ({ workspaces: state.workspaces }))
-class WsList extends Component {
+class WsList extends React.Component {
 
   constructor (...args) {
     super(...args);

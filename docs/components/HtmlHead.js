@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DocumentMeta from 'react-document-meta';
 
-class Head extends Component {
+class Head extends React.Component {
 
   render () {
     const { links } = this.props;

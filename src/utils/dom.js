@@ -1,15 +1,20 @@
+import browser from './browser';
 /**
  * The helper utilites for html dom operating..
  */
 class Dom {
 
   /**
-   * Get broswer vendor prefix. chrome return 'webkit'
+   * Get browser vendor prefix. chrome return 'webkit'
    * @param  {Object} _window default should be window
    * @return {String} the prefix of vendor.
    */
   static getVendorPrefix(_window) {
     if (typeof _window === 'undefined') return '';
+    let { msie, version } = browser;
+    if (msie && parseInt(version) <= 9) {
+      return '';
+    }
     // Thanks David Walsh
     let styles = _window.getComputedStyle(document.documentElement, '');
     let pre = (Array.prototype.slice
@@ -42,6 +47,22 @@ class Dom {
     }
 
     return userSelectStyle;
+  }
+
+  static createCSSTransform = (style) => {
+    // Replace unitless items with px
+    let x = style.x + 'px';
+    let y = style.y + 'px';
+    let out = {
+      transform: 'translate(' + x + ',' + y + ')'
+    };
+    let browserPrefix = Dom.getVendorPrefix(window);
+
+    // Add single prefixed property as well
+    if (browserPrefix) {
+      out[browserPrefix + 'Transform'] = out.transform;
+    }
+    return out;
   }
 
   static getSelectText(el) {

@@ -3,7 +3,7 @@
  * https://github.com/tianyingchun/less-ui
  * Copyright (c) 2015  tianyingchun@outlook.com
  * The less ui components based on bootstrap/amazeui.
- * built on: Sun Sep 06 2015 10:50:10 GMT+0800 (CST)
+ * built on: Mon Sep 21 2015 16:43:40 GMT+0800 (CST)
  */
 /* ==========================================================================
    Component: Base
@@ -629,7 +629,6 @@ select {
   padding-left: 1rem;
   padding-right: 1rem;
   width: 100%;
-  max-width: 1000px;
 }
 .container:before,
 .container:after {
@@ -4220,8 +4219,8 @@ a.close:hover {
 }
 @font-face {
   font-family: "glyphicons";
-  src: url("fonts/glyphicons.eot?4a54c44721891dcb1880dbd45e3d0151");
-  src: url("fonts/glyphicons.eot?#iefix") format("embedded-opentype"), url("fonts/glyphicons.woff?4a54c44721891dcb1880dbd45e3d0151") format("woff"), url("fonts/glyphicons.ttf?4a54c44721891dcb1880dbd45e3d0151") format("truetype"), url("fonts/glyphicons.svg?4a54c44721891dcb1880dbd45e3d0151#glyphicons") format("svg");
+  src: url("fonts/glyphicons.eot?7417dc0cd2714827f1ba88807ea3bbcd");
+  src: url("fonts/glyphicons.eot?#iefix") format("embedded-opentype"), url("fonts/glyphicons.woff?7417dc0cd2714827f1ba88807ea3bbcd") format("woff"), url("fonts/glyphicons.ttf?7417dc0cd2714827f1ba88807ea3bbcd") format("truetype"), url("fonts/glyphicons.svg?7417dc0cd2714827f1ba88807ea3bbcd#glyphicons") format("svg");
   font-weight: normal;
   font-style: normal;
 }

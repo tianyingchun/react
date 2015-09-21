@@ -12,8 +12,8 @@ class Header extends React.Component {
             <Link activeClassName="active" to="/docs">RUI Docs</Link>
           </h1>
           <ul className="nav nav-pills topbar-nav">
-            <RouteLink to="/docs/less">LESS UI</RouteLink>
-            <RouteLink to="/docs/react">React UI</RouteLink>
+            <li><Link to="/docs/less" activeClassName="active">LESS UI</Link></li>
+            <li><Link to="/docs/react" activeClassName="active">React UI</Link></li>
           </ul>
         </div>
       </header>

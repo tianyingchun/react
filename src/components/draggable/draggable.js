@@ -2,7 +2,9 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import Helpers from './helpers/index';
+import Helper from './helper';
+import dom from '../../utils/dom';
+import events  from '../../utils/events';
 import emptyFunction from 'fbjs/lib/emptyFunction';
 
 //
@@ -291,13 +293,13 @@ class Draggable extends React.Component {
 
   componentWillUnmount() {
     // Remove any leftover event handlers
-    Helpers.Events.removeEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).move, this.handleDrag);
-    Helpers.Events.removeEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd);
-    Helpers.Style.removeUserSelectStyles(this);
+    events.off(document, events.dragEventFor(this.isTouchDevice).move, this.handleDrag, true);
+    events.off(document, events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd, true);
+    this.removeUserSelectStyles(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return Helpers.Utils.shallowCompare(this, nextProps, nextState);
+    return Helper.shallowCompare(this, nextProps, nextState);
   }
 
   handleDragStart = (e) => {
@@ -310,20 +312,20 @@ class Draggable extends React.Component {
     this.props.onMouseDown(e);
 
     // Short circuit if handle or cancel prop was provided and selector doesn't match
-    if ((this.props.handle && !Helpers.Utils.matchesSelector(e.target, this.props.handle)) ||
-      (this.props.cancel && Helpers.Utils.matchesSelector(e.target, this.props.cancel))) {
+    if ((this.props.handle && !Helper.matchesSelector(e.target, this.props.handle)) ||
+      (this.props.cancel && Helper.matchesSelector(e.target, this.props.cancel))) {
       return;
     }
 
     // Call event handler. If it returns explicit false, cancel.
-    let shouldStart = this.props.onStart(e, Helpers.Ui.createUIEvent(this));
+    let shouldStart = this.props.onStart(e, Helper.createUIEvent(this));
     if (shouldStart === false) return;
 
-    let dragPoint = Helpers.Events.getControlPosition(e);
+    let dragPoint = this.getControlPosition(e);
 
     // Add a style to the body to disable user-select. This prevents text from
     // being selected all over the page.
-    Helpers.Style.addUserSelectStyles(this);
+    this.addUserSelectStyles(this);
 
     // Initiate dragging. Set the current x and y as offsets
     // so we know how much we've moved during the drag. This allows us
@@ -337,9 +339,9 @@ class Draggable extends React.Component {
     });
 
     // Add event handlers
-    Helpers.Events.addEvent(document, 'scroll', this.handleScroll);
-    Helpers.Events.addEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).move, this.handleDrag);
-    Helpers.Events.addEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd);
+    events.on(document, 'scroll', this.handleScroll, true);
+    events.on(document, events.dragEventFor(this.isTouchDevice).move, this.handleDrag, true);
+    events.on(document, events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd, true);
   }
 
   handleDragEnd = (e) => {
@@ -353,7 +355,7 @@ class Draggable extends React.Component {
       return;
     }
 
-    Helpers.Style.removeUserSelectStyles(this);
+    this.removeUserSelectStyles(this);
 
     // Turn off dragging
     this.setState({
@@ -361,20 +363,62 @@ class Draggable extends React.Component {
     });
 
     // Call event handler
-    this.props.onStop(e, Helpers.Ui.createUIEvent(this));
+    this.props.onStop(e, Helper.createUIEvent(this));
 
     // Remove event handlers
-    Helpers.Events.removeEvent(document, 'scroll', this.handleScroll);
-    Helpers.Events.removeEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).move, this.handleDrag);
-    Helpers.Events.removeEvent(document, Helpers.Events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd);
+    events.off(document, 'scroll', this.handleScroll, true);
+    events.off(document, events.dragEventFor(this.isTouchDevice).move, this.handleDrag, true);
+    events.off(document, events.dragEventFor(this.isTouchDevice).end, this.handleDragEnd, true);
   }
+
+  addUserSelectStyles = () => {
+    if (this.props.enableUserSelectHack) {
+      let style = document.body.getAttribute('style') || '';
+      document.body.setAttribute('style', style + dom.selectStyle());
+    } else {
+      console.warn('UserSelectHack is not enabled');
+    }
+  };
+
+  removeUserSelectStyles = () => {
+    if (this.props.enableUserSelectHack) {
+      let style = document.body.getAttribute('style') || '';
+      document.body.setAttribute('style', style.replace(dom.selectStyle(), ''));
+    } else {
+      console.warn('UserSelectHack is not enabled');
+    }
+  }
+   /**
+   * snap the x,y coords to a grid
+   * @param  {Array}  grid     x,y snap bounds
+   * @param  {Number} pendingX potential x value
+   * @param  {Number} pendingY potential y value
+   * @return {Array}           tuple of actual x,y
+   */
+  snapToGrid = (grid, pendingX, pendingY) => {
+    let x = Math.round(pendingX / grid[0]) * grid[0];
+    let y = Math.round(pendingY / grid[1]) * grid[1];
+    return [x, y];
+  }
+
+  /**
+  * get {clientX, clientY} positions of control
+  * */
+  getControlPosition = (e) => {
+    let position = (e.targetTouches && e.targetTouches[0]) || e;
+    return {
+      clientX: position.clientX,
+      clientY: position.clientY
+    };
+  }
+
 
   handleDrag = (e) => {
     // Return if this is a touch event, but not the correct one for this element
     if (e.targetTouches && (e.targetTouches[0].identifier != this.state.touchIdentifier)){
       return;
     }
-    let dragPoint = Helpers.Events.getControlPosition(e);
+    let dragPoint = this.getControlPosition(e);
 
     // Calculate X and Y
     let clientX = dragPoint.clientX - this.state.offsetX;
@@ -382,19 +426,19 @@ class Draggable extends React.Component {
 
     // Snap to grid if prop has been provided
     if (Array.isArray(this.props.grid)) {
-      let coords = Helpers.Style.snapToGrid(this.props.grid, clientX, clientY);
+      let coords = this.snapToGrid(this.props.grid, clientX, clientY);
       clientX = coords[0];
       clientY = coords[1];
     }
 
     if (this.props.bounds) {
-      let pos = Helpers.Ui.getBoundPosition(this, clientX, clientY);
+      let pos = Helper.getBoundPosition(this, clientX, clientY);
       clientX = pos[0];
       clientY = pos[1];
     }
 
     // Call event handler. If it returns explicit false, cancel.
-    let shouldUpdate = this.props.onDrag(e, Helpers.Ui.createUIEvent(this));
+    let shouldUpdate = this.props.onDrag(e, Helper.createUIEvent(this));
     if (shouldUpdate === false) return this.handleDragEnd.call(this);
 
     // Update transform
@@ -421,7 +465,7 @@ class Draggable extends React.Component {
     // Prevent 'ghost click' which happens 300ms after touchstart if the event isn't cancelled.
     // We don't cancel the event on touchstart because of #37; we might want to make a scrollable item draggable.
     // More on ghost clicks: http://ariatemplates.com/blog/2014/05/ghost-clicks-in-mobile-browsers/
-    if (Helpers.Events.dragEventFor === Helpers.Events.eventsFor.touch) {
+    if (events.dragEventFor === events.eventsFor.touch) {
       return e.preventDefault();
     }
 
@@ -455,14 +499,14 @@ class Draggable extends React.Component {
     // without worrying about whether or not it is relatively or absolutely positioned.
     // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
     // has a clean slate.
-    let transform = Helpers.Style.createCSSTransform({
+    let transform = dom.createCSSTransform({
       // Set left if horizontal drag is enabled
-      x: Helpers.Utils.canDragX(this) ?
+      x: Helper.canDragX(this) ?
         this.state.clientX :
         this.props.start.x,
 
       // Set top if vertical drag is enabled
-      y: Helpers.Utils.canDragY(this) ?
+      y: Helper.canDragY(this) ?
         this.state.clientY :
         this.props.start.y
     });

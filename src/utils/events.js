@@ -18,7 +18,7 @@ class Events {
     };
 
     for (let i = typeArray.length - 1; i >= 0; i--) {
-      this.on(node, typeArray[i], recursiveFunction);
+      Events.on(node, typeArray[i], recursiveFunction);
     }
   }
 

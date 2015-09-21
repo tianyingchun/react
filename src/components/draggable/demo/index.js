@@ -89,7 +89,7 @@ class Demo extends Component {
             </Draggable>
           </div>
           <Draggable>
-            <div className="box" style={{position: 'absolute', bottom: '100px', right: '100px'}} {...drags}>
+            <div className="box" style={{position: 'absolute', top: '315px', right: '60px'}} {...drags}>
               I already have an absolute position.
             </div>
           </Draggable>

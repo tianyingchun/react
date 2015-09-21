@@ -9,7 +9,7 @@ class DocLayout extends React.Component {
         <Layout layoutHeight={50}>
           <DocHeader />
         </Layout>
-        <Layout layoutHeight='flex' className="container">
+        <Layout layoutHeight='flex' className="page-body container">
           { this.props.children }
         </Layout>
       </Layout>

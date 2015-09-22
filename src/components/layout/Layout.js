@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import emptyFunction from 'fbjs/lib/emptyFunction';
@@ -12,7 +12,7 @@ import _ from '../../utils/lang';
  * don't support touch device.
  */
 
-class Layout extends React.Component {
+class Layout extends Component {
 
   static propTypes = {
     /**
@@ -20,13 +20,19 @@ class Layout extends React.Component {
      * @param direction ('vertical', 'horizontal')
      * @param info (the width or height of current `Layout`)
      */
-    onLayoutChanged: React.PropTypes.func,
+    onLayoutChanged: PropTypes.func,
     /**
      * By default, we add 'user-select:none' attributes to the document body
      * to prevent ugly text selection during drag. If this is causing problems
      * for your app, set this to `false`.
      */
-    enableUserSelectHack: React.PropTypes.bool
+    enableUserSelectHack: PropTypes.bool,
+
+    // You can only specify layoutHeight or layoutWidth at a single level
+    // for horizontal layout. px(number), 'flex'(string)
+    layoutWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    // for vertical layout.   px(number), 'flex'(string)
+    layoutHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }
 
   static defaultProps = {
@@ -206,6 +212,7 @@ class Layout extends React.Component {
 
   render() {
 
+    console.log('layout render!');
     let width = this.getWidth();
     let height = this.getHeight();
 

@@ -7,7 +7,11 @@ export class LayoutSplitter extends React.Component {
     orientation: PropTypes.string,
     hideSelection: PropTypes.func,
     getPreviousLayout: PropTypes.func,
-    getNextLayout: PropTypes.func
+    getNextLayout: PropTypes.func,
+    // You can only specify layoutHeight or layoutWidth at a single level
+    // In most case we need to s
+    layoutWidth: PropTypes.number,
+    layoutHeight: PropTypes.number
   }
 
   constructor(props) {
@@ -24,11 +28,9 @@ export class LayoutSplitter extends React.Component {
     // The weight of splitter.
     let splitterWeight = 11;
     if (orientation === 'horizontal') {
-      this.props.layoutWidth = this.props.layoutWidth || splitterWeight;
       this.state.layoutWidth = layoutWidth || splitterWeight;
       layoutChanged();
     } else if (orientation === 'vertical') {
-      this.props.layoutHeight = this.props.layoutHeight || splitterWeight;
       this.state.layoutHeight = layoutHeight || splitterWeight;
       layoutChanged();
     }

@@ -9,9 +9,8 @@ class ReactDocLayout extends React.Component {
     layoutWidthFlex: 0,
     layoutHeightFlex: 0
   }
-
   layoutChanged = (layoutInfo) => {
-    console.log('layoutInfo',layoutInfo)
+    // console.log('layoutInfo',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
@@ -22,7 +21,7 @@ class ReactDocLayout extends React.Component {
     this.setState(newState);
   }
   layoutChangedFlex = (layoutInfo) => {
-    console.log('layoutInfoFlex',layoutInfo)
+    // console.log('layoutInfoFlex',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
@@ -33,9 +32,10 @@ class ReactDocLayout extends React.Component {
     this.setState(newState);
   }
   render () {
+    console.log('react doc layout render');
     let params = this.props.params;
     let example = '什么都还没有呢？';
-    console.log('router params:', params);
+    // console.log('router params:', params);
     switch (params.component) {
       case 'draggable':
         example = <DraggableDemo />;
@@ -43,11 +43,6 @@ class ReactDocLayout extends React.Component {
     }
     return (
       <Layout className="row" fill='container'>
-       <Layout layoutWidth={50}>
-       <p>icon 1</p>
-       <p>icon 2</p>
-       <p>icon 3</p>
-       </Layout>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
             <ScrollArea speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
               <ul className="nav nav-left-dock">
@@ -58,7 +53,7 @@ class ReactDocLayout extends React.Component {
               </ul>
             </ScrollArea>
           </Layout>
-          <LayoutSplitter />
+          <LayoutSplitter layoutWidth={11} />
           <Layout layoutWidth='flex' onLayoutChanged={this.layoutChangedFlex}>
             <ScrollArea speed={0.8} width={this.state.layoutWidthFlex} height={this.state.layoutHeightFlex} amSize={'sm'} contentClassName="content">
               {example}

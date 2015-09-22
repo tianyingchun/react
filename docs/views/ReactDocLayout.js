@@ -9,33 +9,34 @@ class ReactDocLayout extends React.Component {
     layoutWidthFlex: 0,
     layoutHeightFlex: 0
   }
+
   layoutChanged = (layoutInfo) => {
-    // console.log('layoutInfo',layoutInfo)
+    console.log('layoutInfo',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
-      layoutWidth: layoutWidth || this.state.layoutWidth,
-      layoutHeight: layoutHeight || this.state.layoutHeight
+      width: layoutWidth || this.state.layoutWidth,
+      height: layoutHeight || this.state.layoutHeight
     };
-
-    this.setState(newState);
+    // performance
+    // directly reset scrollarea instead setState() on the hight level to re render all components.
+    this.refs.leftContainer.resetScrollArea(newState);
   }
   layoutChangedFlex = (layoutInfo) => {
-    // console.log('layoutInfoFlex',layoutInfo)
+    console.log('layoutInfoFlex',layoutInfo)
     let { layoutWidth, layoutHeight } = (layoutInfo || {});
 
     let newState = {
-      layoutWidthFlex: layoutWidth || this.state.layoutWidthFlex,
-      layoutHeightFlex: layoutHeight || this.state.layoutHeightFlex
+      width: layoutWidth || this.state.layoutWidthFlex,
+      height: layoutHeight || this.state.layoutHeightFlex
     };
 
-    this.setState(newState);
+    this.refs.flexContainer.resetScrollArea(newState);
+
   }
   render () {
-    console.log('react doc layout render');
     let params = this.props.params;
     let example = '什么都还没有呢？';
-    // console.log('router params:', params);
     switch (params.component) {
       case 'draggable':
         example = <DraggableDemo />;
@@ -44,7 +45,7 @@ class ReactDocLayout extends React.Component {
     return (
       <Layout className="row" fill='container'>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
-            <ScrollArea speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
+            <ScrollArea ref="leftContainer" speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
               <ul className="nav nav-left-dock">
                 <li className="nav-header">
                   布局相关
@@ -55,7 +56,7 @@ class ReactDocLayout extends React.Component {
           </Layout>
           <LayoutSplitter layoutWidth={11} />
           <Layout layoutWidth='flex' onLayoutChanged={this.layoutChangedFlex}>
-            <ScrollArea speed={0.8} width={this.state.layoutWidthFlex} height={this.state.layoutHeightFlex} amSize={'sm'} contentClassName="content">
+            <ScrollArea speed={0.8} ref="flexContainer" width={this.state.layoutWidthFlex} height={this.state.layoutHeightFlex} amSize={'sm'} contentClassName="content">
               {example}
             </ScrollArea>
           </Layout>

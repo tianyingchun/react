@@ -17,8 +17,7 @@ class Layout extends Component {
   static propTypes = {
     /**
      * Called when Layout have been changed.
-     * @param direction ('vertical', 'horizontal')
-     * @param info (the width or height of current `Layout`)
+     * @param layoutInfo (the width or height of current `Layout`)
      */
     onLayoutChanged: PropTypes.func,
     /**
@@ -212,7 +211,7 @@ class Layout extends Component {
 
   render() {
 
-    console.log('layout render!');
+    // console.log('layout render!');
     let width = this.getWidth();
     let height = this.getHeight();
 

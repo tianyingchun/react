@@ -29,11 +29,16 @@ class ScrollArea extends React.Component {
     topPosition: 0,
     leftPosition: 0,
     realHeight: 0,
+    containerWidth: 0,
     containerHeight: 0,
     realWidth: 0,
-    containerWidth: 0,
     scrollableX: false,
-    scrollableY: false
+    scrollableY: false,
+
+    // for scrollarea we need to specific fixed width and height in order to calculate the scrollSize.
+    // Maybe we can get the height and width via Layout conponent 'onLayoutChanged' event.
+    fixedContainerHeight: this.props.height || 0,
+    fixedContainerWidth: this.props.width || 0
   }
 
   componentDidMount() {
@@ -51,6 +56,28 @@ class ScrollArea extends React.Component {
 
   componentWillReceiveProps (nextProps) {
     this.setSizesToState();
+  }
+
+  /**
+   * Sometimes we need to reset scrollarea width and height manully.
+   * @public
+   * @param  {Object} containerInfo {width:px, height: px}
+   */
+  resetScrollArea (containerInfo) {
+    if (containerInfo) {
+
+      var bound = {
+        fixedContainerWidth: containerInfo.width || this.state.fixedContainerWidth,
+        fixedContainerHeight: containerInfo.height || this.state.fixedContainerHeight
+      };
+
+      // console.log('resetScrollArea', containerInfo, bound);
+      let newState = Object.assign({}, this.state, bound);
+
+      this.setState(newState);
+
+      // this.setSizesToState();
+    }
   }
 
   handleMove = (deltaY, deltaX) => {
@@ -170,9 +197,9 @@ class ScrollArea extends React.Component {
     return state.scrollableX && this.props.horizontal;
   }
   render() {
-    let { width, height, amSize, className, contentClassName } = this.props;
+    let { amSize, className, contentClassName } = this.props;
 
-    let { realHeight, containerHeight, topPosition } = this.state;
+    let { realWidth, realHeight, fixedContainerHeight, fixedContainerWidth, containerWidth, containerHeight, topPosition, leftPosition } = this.state;
 
     let scrollbarY = this.canScrollY() ?
       (
@@ -184,8 +211,6 @@ class ScrollArea extends React.Component {
           type = "vertical"
           amSize ={amSize} />
       ) : null;
-
-    let { realWidth, containerWidth, leftPosition } = this.state;
 
     let scrollbarX = this.canScrollX() ?
       (
@@ -204,8 +229,8 @@ class ScrollArea extends React.Component {
     };
 
     let scrollAreaStyle = {
-      width: width,
-      height: height
+      width: fixedContainerWidth,
+      height: fixedContainerHeight
     };
 
     let classes = classNames('scrollarea' ,className);

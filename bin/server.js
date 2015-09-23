@@ -39,7 +39,6 @@ function handleRender(req, res) {
   let { project, routes, jsBundles, cssBundles } = getRenderParams(req, NODE_ENV);
 
   if (!routes || !project)  {
-
     console.log('router match failed in build.config.js, 404 not found!');
     // should give 404.
     res.status(404).send('Not found');

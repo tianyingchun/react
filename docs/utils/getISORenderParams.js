@@ -75,11 +75,13 @@ const getRenderParams = (req, env) => {
       })));
     });
 
+    let routePath;
     try {
+      routePath = path.join(process.cwd(), fundProject.routes);
       // the routes of current sub project(project).
-      routes = require(path.join(process.cwd(), fundProject.routes));
+      routes = require(routePath);
     } catch (e) {
-      console.log(e);
+      console.log('require routes components has errors: ', routePath, e);
       routes = null;
     }
   } else {

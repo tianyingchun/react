@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Menu from 'rc-menu';
-import animation from '../../utils/openAnimation';
+// import animation from '../../utils/openAnimation';
 class ZMenu extends Component {
 
   static defaultProps = {
@@ -8,24 +8,24 @@ class ZMenu extends Component {
   }
 
   render () {
-    let openAnimation = '';
-    switch (this.props.mode) {
-    case 'horizontal':
-      openAnimation = 'slide-up';
-      break;
-    case 'vertical':
-      openAnimation = 'zoom-big';
-      break;
-    case 'inline':
-      openAnimation = animation;
-      break;
-    default:
-    }
+    // let openAnimation = '';
+    // switch (this.props.mode) {
+    // case 'horizontal':
+    //   openAnimation = 'slide-up';
+    //   break;
+    // case 'vertical':
+    //   openAnimation = 'zoom-big';
+    //   break;
+    // case 'inline':
+    //   openAnimation = animation;
+    //   break;
+    // default:
+    // }
 
     if (this.props.mode === 'inline') {
-      return <Menu {...this.props} openAnimation={openAnimation} />;
+      return <Menu {...this.props} />;
     } else {
-      return <Menu {...this.props} openTransitionName={openAnimation} />;
+      return <Menu {...this.props} />;
     }
   }
 }

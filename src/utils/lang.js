@@ -1,4 +1,5 @@
 const toString = Object.prototype.toString;
+const hasOwnProperty = hasOwnProperty;
 const nativeIsArray = Array.isArray;
 // extract some undercore utilities here.
 const _ = {
@@ -51,7 +52,28 @@ const _ = {
     }
     // return the formatted string
     return fmt;
-  }
+  },
+  noop: function noop() {},
+  has: function (o, k) {
+    return o ? hasOwnProperty.call(o, k) : false;
+  },
+  isShallowEqual: function (a, b) {
+    if (a === b) return true;
+    if (a instanceof Date && b instanceof Date) {
+      return a.getTime() === b.getTime();
+    }
+
+    if (typeof a !== 'object' && typeof b !== 'object') {
+      return a === b;
+    }
+
+    if (typeof a !== typeof b) {
+      return false;
+    }
+
+    return shallowEqual(a, b);
+  },
+
 };
 
 // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.

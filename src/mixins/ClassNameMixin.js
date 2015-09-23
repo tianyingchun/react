@@ -23,7 +23,7 @@ const ClassNameMixin = {
 
     let amSize = this.props.amSize;
     let amStyle = this.props.amStyle;
-
+    let theme = this.props.theme;
     if (amSize) {
       classNames[prefix + amSize] = true;
     }
@@ -33,8 +33,8 @@ const ClassNameMixin = {
     }
 
     // add theme className for widgets
-    if (this.props.theme) {
-      classNames[prefix + this.props.theme] = true;
+    if (theme) {
+      classNames[prefix + theme] = true;
     }
 
     // states
@@ -48,7 +48,7 @@ const ClassNameMixin = {
     // clearfix
     classNames[constants.CLASSES.cf] = this.props.cf;
 
-    // am-divider
+    // divider
     if (this.props.classPrefix !== 'divider') {
       classNames[constants.CLASSES.divider] = this.props.divider;
     }

@@ -2,10 +2,12 @@ var path = require('path');
 var express = require('express');
 var cors = require('cors');
 var favicon = require('serve-favicon');
+var compression = require('compression');
 
 var app = express();
 var port = process.env.PORT || 40000;
-
+// compress all requests
+app.use(compression());
 app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
 
 // Use this middleware to serve up static files built into the dist directory

@@ -1,4 +1,4 @@
-let platform = () => {
+const platform = function () {
   // for server rendering.
   if (typeof navigator ==='undefined') return {};
   let ua = navigator.userAgent.toLowerCase();
@@ -28,7 +28,5 @@ let platform = () => {
   return browser;
 };
 
-let browser = platform();
-
-export default browser;
+export default platform();
 

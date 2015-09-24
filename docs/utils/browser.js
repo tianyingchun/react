@@ -1,5 +1,5 @@
 import { createHistory, createHashHistory } from 'history'
-import browser from '../../src/utils/browser';
+import browser from '../../src/utils/platform';
 
 let autoHistory = () => {
   let { msie, version } = browser;

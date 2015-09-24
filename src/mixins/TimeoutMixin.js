@@ -1,8 +1,7 @@
- var {
-   has
- } = require('../util/lang');
+ import { has } = require('../util/lang');
+
  // https://github.com/jquense/react-widgets
- module.exports = {
+ export default {
 
    componentWillUnmount() {
      var timers = this._timers || {};
@@ -12,7 +11,7 @@
          clearTimeout(timers[k]);
        }
      }
-   }
+   },
 
    setTimeout(key, cb, duration) {
      var timers = this._timers || (this._timers = Object.create(null));

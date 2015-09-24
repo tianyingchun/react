@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Helper from './helper';
 import dom from '../../utils/dom';
+import STYLE from '../../utils/style';
 import events  from '../../utils/events';
-import emptyFunction from 'fbjs/lib/emptyFunction';
-
+import _, { noop as emptyFunction } from '../../utils/lang';
 //
 // Define <Draggable>
 class Draggable extends React.Component {
@@ -374,7 +374,7 @@ class Draggable extends React.Component {
   addUserSelectStyles = () => {
     if (this.props.enableUserSelectHack) {
       let style = document.body.getAttribute('style') || '';
-      document.body.setAttribute('style', style + dom.selectStyle());
+      document.body.setAttribute('style', style + STYLE.selectStyle());
     } else {
       console.warn('UserSelectHack is not enabled');
     }
@@ -383,7 +383,7 @@ class Draggable extends React.Component {
   removeUserSelectStyles = () => {
     if (this.props.enableUserSelectHack) {
       let style = document.body.getAttribute('style') || '';
-      document.body.setAttribute('style', style.replace(dom.selectStyle(), ''));
+      document.body.setAttribute('style', style.replace(STYLE.selectStyle(), ''));
     } else {
       console.warn('UserSelectHack is not enabled');
     }
@@ -499,7 +499,8 @@ class Draggable extends React.Component {
     // without worrying about whether or not it is relatively or absolutely positioned.
     // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
     // has a clean slate.
-    let transform = dom.createCSSTransform({
+
+    let transform = STYLE.createCSSTransform({
       // Set left if horizontal drag is enabled
       x: Helper.canDragX(this) ?
         this.state.clientX :

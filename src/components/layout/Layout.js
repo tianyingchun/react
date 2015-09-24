@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import emptyFunction from 'fbjs/lib/emptyFunction';
 import LayoutSplitter from './LayoutSplitter';
 import dom from '../../utils/dom';
+import STYLE from '../../utils/style';
 import events from '../../utils/events';
-import _ from '../../utils/lang';
+import _, { noop } from '../../utils/lang';
 
 /**
  * The flex layout component only suite for desktop,
@@ -36,7 +36,7 @@ class Layout extends Component {
 
   static defaultProps = {
     enableUserSelectHack: true,
-    onLayoutChanged: emptyFunction
+    onLayoutChanged: noop
   }
 
   constructor(props) {
@@ -301,7 +301,7 @@ class Layout extends Component {
   addUserSelectStyles = () => {
     if (this.props.enableUserSelectHack) {
       let style = document.body.getAttribute('style') || '';
-      document.body.setAttribute('style', style + dom.selectStyle());
+      document.body.setAttribute('style', style + STYLE.selectStyle());
     } else {
       console.warn('UserSelectHack is not enabled');
     }
@@ -313,7 +313,7 @@ class Layout extends Component {
   removeUserSelectStyles = () => {
     if (this.props.enableUserSelectHack) {
       let style = document.body.getAttribute('style') || '';
-      document.body.setAttribute('style', style.replace(dom.selectStyle(), ''));
+      document.body.setAttribute('style', style.replace(STYLE.selectStyle(), ''));
     }
     else {
       console.warn('UserSelectHack is not enabled');

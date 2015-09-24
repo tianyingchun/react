@@ -1,3 +1,7 @@
+/**
+ * The current browser platform information
+ * @return {Object} browser info
+ */
 const platform = function () {
   // for server rendering.
   if (typeof navigator ==='undefined') return {};

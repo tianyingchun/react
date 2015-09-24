@@ -1,8 +1,7 @@
-import lang from './lang';
+import URI from './URI';
 
 class WebAPI {
   // PATH related utitlites.
-  PATH = lang.PATH
 
 }
 export default WebAPI;

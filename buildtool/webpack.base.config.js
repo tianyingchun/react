@@ -8,7 +8,7 @@ module.exports = function baseConfig() {
   return {
     entry: {
       // for convenience, we should always define libaray as react-kits entry.
-      library: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-logger', 'wurl', 'redux-simple-promise', 'superagent'],
+      library: ['react', 'react-dom', 'react-router', 'redux', 'react-redux', 'redux-logger', 'wurl', 'redux-simple-promise', 'axios'],
       // customized module entry definitions.
     },
     module: {
@@ -40,6 +40,12 @@ module.exports = function baseConfig() {
       // workspace/member/bundle.js
       filename: '${projectName}/[name]/bundle.js${version}'
       // publicPath: 'http://cdn.xx.com/public/' will set dynamicly via buildtool.
+    },
+    stats: {
+      // Configure the console output, https://github.com/webpack/grunt-webpack
+      // colors: false,
+      // modules: true,
+      // reasons: true
     },
     resolve: {
       extensions: ['', '.js']

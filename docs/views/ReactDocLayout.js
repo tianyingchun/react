@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 import { default as DraggableDemo } from '../../src/components/draggable/demo';
-import MenuDemo from '../../src/components/menu/demo';
+import DocMenu from '../components/DocMenu';
 
 class ReactDocLayout extends React.Component {
   state = {
@@ -44,7 +44,7 @@ class ReactDocLayout extends React.Component {
         example = <DraggableDemo />;
         break;
       case 'menu':
-        example = <MenuDemo />;
+        example = <DocMenu />;
         break;
     }
     return (

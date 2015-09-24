@@ -38,7 +38,7 @@ const ClassNameMixin = {
     }
 
     // states
-    classNames[constants.CLASSES.active] = this.props.active;
+    classNames[constants.CLASSES.active] = !this.props.disabled && this.props.active;
     classNames[constants.CLASSES.disabled] = this.props.disabled;
 
     // shape
@@ -58,6 +58,11 @@ const ClassNameMixin = {
   // add namespace to classPrefix
   setClassNamespace: function (classPrefix) {
     let prefix = classPrefix || this.props.classPrefix || '';
+    // the root prefix class usually used to parent component.
+    let rootPrefix = this.props.classRootPrefix || '';
+    if (rootPrefix) {
+      return nsPrefix + rootPrefix + '-' + prefix;
+    }
     return nsPrefix + prefix;
   },
   prefixClass: function (subClass) {

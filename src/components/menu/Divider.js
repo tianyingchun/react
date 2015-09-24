@@ -1,11 +1,12 @@
-import react from 'react';
+import React from 'react';
+import mixin from '../../utils/mixin';
 import ClassNameMixin from '../../mixins/ClassNameMixin';
 import classNames from 'classnames';
 
-class Divider extends mixins(ClassNameMixin) {
+class Divider extends mixin(ClassNameMixin) {
 
   static propTypes = {
-    theme: React.PropTypes.oneOf(['default','dotted','dashed'),
+    theme: React.PropTypes.oneOf(['default','dotted','dashed']),
     classPrefix: React.PropTypes.string
   }
   static defaultProps= {

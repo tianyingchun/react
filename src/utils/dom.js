@@ -8,6 +8,16 @@ const dom = {
     if (!canUseDOM) return '';
     return typeof el.selectionStart == 'number' ? el.value.substring(el.selectionStart, el.selectionEnd) : document.selection.createRange().text;
   },
+
+  contains (root, node) {
+    while (node) {
+      if (node === root) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  },
   /**
    * isInViewport
    *

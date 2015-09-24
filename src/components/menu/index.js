@@ -1,37 +1,10 @@
-import React, { Component } from 'react';
-import Menu from 'rc-menu';
-// import animation from '../../utils/openAnimation';
-class ZMenu extends Component {
+import Menu from './Menu';
+import SubMenu from './SubMenu';
+import MenuItem from './MenuItem';
+import Divider from './Divider';
 
-  static defaultProps = {
-    prefixCls: 'menu'
-  }
+Menu.SubMenu = SubMenu;
+Menu.Item = MenuItem;
+Menu.Divider = Divider;
 
-  render () {
-    // let openAnimation = '';
-    // switch (this.props.mode) {
-    // case 'horizontal':
-    //   openAnimation = 'slide-up';
-    //   break;
-    // case 'vertical':
-    //   openAnimation = 'zoom-big';
-    //   break;
-    // case 'inline':
-    //   openAnimation = animation;
-    //   break;
-    // default:
-    // }
-
-    if (this.props.mode === 'inline') {
-      return <Menu {...this.props} />;
-    } else {
-      return <Menu {...this.props} />;
-    }
-  }
-}
-
-ZMenu.Divider = Menu.Divider;
-ZMenu.Item = Menu.Item;
-ZMenu.SubMenu = Menu.SubMenu;
-
-export default ZMenu;
+export default Menu;

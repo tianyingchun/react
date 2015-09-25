@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
+import MenuDemo from '../../src/components/menu/demo';
 
 class ReactDocLayout extends React.Component {
   state = {
@@ -44,21 +45,14 @@ class ReactDocLayout extends React.Component {
         example = <DraggableDemo />;
         break;
       case 'menu':
-        example = <DocMenu />;
+        example = <MenuDemo />;
         break;
     }
     return (
       <Layout className="row" fill='container'>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
             <ScrollArea ref="leftContainer" speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
-
-              <ul className="nav nav-left-dock">
-                <li className="nav-header">
-                  布局相关
-                </li>
-                <li><Link to="/docs/react/draggable" activeClassName="active">Draggable</Link></li>
-                <li><Link to="/docs/react/menu" activeClassName="active">Menu</Link></li>
-              </ul>
+              <DocMenu />
             </ScrollArea>
           </Layout>
           <LayoutSplitter layoutWidth={11} />

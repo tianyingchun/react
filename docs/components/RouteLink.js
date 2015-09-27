@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, History } from 'react-router';
-import mixin from '../../src/utils/mixin';
 
 const RouteLink = React.createClass({
   mixins:[History],

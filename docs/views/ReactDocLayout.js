@@ -31,7 +31,7 @@ class ReactDocLayout extends React.Component {
 
     let newState = {
       width: layoutWidth || this.state.layoutWidthFlex,
-      height: layoutHeight || this.state.layoutHeightFlex
+      height: (layoutHeight || this.state.layoutHeightFlex)-20
     };
 
     this.refs.flexContainer.resetScrollArea(newState);

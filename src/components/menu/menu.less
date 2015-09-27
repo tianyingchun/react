@@ -12,7 +12,7 @@
   border-radius: @widget-global-radius;
   color: @widget-text-color;
   background: #fff;
-
+  margin-top: 0;
   &-item-group-list {
     margin: 0;
     padding: 0;
@@ -99,7 +99,8 @@
     }
 
     &-vertical > .@{menu-prefix-cls}-submenu-title:after {
-      font-family: "glyph-icon" !important;
+      font-family: "glyphicons" !important;
+      color: @text-color;
       font-style: normal;
       vertical-align: baseline;
       text-align: center;
@@ -107,25 +108,28 @@
       text-rendering: auto;
       position: absolute;
       transition: transform .3s ease;
-      content: "\e600";
+      content: @fa-var-circle-down;
       right: 16px;
       .ie-rotate(3);
-      transform: rotate(270deg) scale(0.75);
+      transform: rotate(270deg) scale(1);
     }
 
     &-inline > .@{menu-prefix-cls}-submenu-title:after {
-      font-family: "glyph-icon" !important;
+      font-family: "glyphicons" !important;
       font-style: normal;
+      color: @text-color;
       vertical-align: baseline;
       text-align: center;
       text-transform: none;
       text-rendering: auto;
       position: absolute;
       transition: transform .3s ease;
-      content: "\e600";
+      content: @fa-var-circle-down;
       right: 16px;
       top: 0;
-      .iconfont-size-under-12px(8px);
+      transform: rotate(360deg) scale(1);
+
+      // .iconfont-size-under-12px(8px);
     }
 
     &-open {
@@ -134,7 +138,7 @@
       }
       &.@{menu-prefix-cls}-submenu-inline > .@{menu-prefix-cls}-submenu-title:after {
         .ie-rotate(1);
-        transform: rotate(180deg) scale(0.75);
+        transform: rotate(180deg) scale(1);
       }
 
     }
@@ -142,10 +146,17 @@
 
   .@{menu-prefix-cls}-submenu-title, .@{menu-prefix-cls}-item {
     .glyph-icon {
+      position: relative;
+      display: inline-block;
+      font-style: normal;
+      vertical-align: baseline;
+      text-align: center;
+      text-transform: none;
+      text-rendering: auto;
       width: 14px;
       margin-right: 8px;
       top: -1px;
-      color: #999;
+      color: @text-color;
     }
   }
 
@@ -211,7 +222,7 @@
     padding: 12px 0;
     & > .@{menu-prefix-cls}-item, & > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
       padding: 0 24px;
-      font-size: 12px;
+      font-size: @font-size-sm;
       line-height: 42px;
       height: 42px;
     }

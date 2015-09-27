@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RcMenu from 'rc-menu';
-// import animation from '../common/openAnimation';
+import animation from '../core/openAnimation';
 if (process.env.BROWSER) {
   require('./menu.less');
 }
@@ -18,7 +18,7 @@ class Menu extends Component {
         openAnimation = 'zoom-big';
         break;
       case 'inline':
-        // openAnimation = animation;
+        openAnimation = animation;
         break;
       default:
     }

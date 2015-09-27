@@ -28,6 +28,7 @@ app.use(favicon(path.join(__dirname, '../public/favicon.ico')));
 
 // Use this middleware to serve up static files built into the dist directory, milliseconds
 app.use("/public", cors(), express.static(path.join(__dirname, '../public'), { maxAge: '30 days'}));
+app.use("/shared", cors(), express.static(path.join(__dirname, '../shared'), { maxAge: '30 days'}));
 
 // This is fired every time the server side receives a request
 app.use(handleRender);

@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
 
 if (process.env.BROWSER) {
-  require('./tag.less');
+  require('./TagItem.less');
 }
 
-class Tag extends Component {
+class TagItem extends Component {
 
   static defaultProps = {
     prefixCls: 'tag',
     closable: false,
     amStyle: '',
-    onClose: function() {}
+    onDelete: function() {}
   }
 
   static propTypes = {
@@ -24,19 +24,15 @@ class Tag extends Component {
     // warning: 'warning',
     // danger: 'danger'
     amStyle:  React.PropTypes.oneOf(['', 'default', 'primary', 'secondary', 'success', 'warning', 'danger']),
-    onClose: React.PropTypes.func
+    onDelete: React.PropTypes.func
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      closing: false,
-      closed: false
-    };
+  state = {
+    closing: false,
+    closed: false
   }
 
-  close(e) {
+  close (e) {
     let dom = ReactDOM.findDOMNode(this);
     dom.style.width = dom.offsetWidth + 'px';
     // It's Magic Code, don't know why
@@ -44,17 +40,17 @@ class Tag extends Component {
     this.setState({
       closing: true
     });
-    this.props.onClose.call(this, e);
+    this.props.onDelete.call(this, e);
   }
 
-  animationEnd() {
+  animationEnd () {
     this.setState({
       closed: true,
       closing: false
     });
   }
 
-  render() {
+  render () {
     let close = this.props.closable
       ? <i className="glyph-icon glyph-cancel-circle" onClick={this.close.bind(this)}></i>
       : '';
@@ -67,11 +63,11 @@ class Tag extends Component {
       this.state.closed
       ? null
       : <Animate component=""
-                 showProp="data-show"
-                 transitionName="zoom-tag"
-                 onEnd={this.animationEnd.bind(this)}>
+           showProp="data-show"
+           transitionName="zoom-tag"
+           onEnd={this.animationEnd.bind(this)}>
           <div data-show={!this.state.closing} className={className}>
-            <a className={this.props.prefixCls + '-text'} {...this.props} />
+            <a className={this.props.prefixCls + '-text'}>{this.props.children}</a>
             {close}
           </div>
         </Animate>
@@ -79,4 +75,4 @@ class Tag extends Component {
   }
 }
 
-export default Tag;
+export default TagItem;

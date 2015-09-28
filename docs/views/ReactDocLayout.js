@@ -4,6 +4,8 @@ import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
 import MenuDemo from '../../src/components/menu/demo';
+import MessageDemo from '../../src/components/message/demo';
+
 
 class ReactDocLayout extends React.Component {
   state = {
@@ -44,8 +46,13 @@ class ReactDocLayout extends React.Component {
       case 'draggable':
         example = <DraggableDemo />;
         break;
+
       case 'menu':
         example = <MenuDemo />;
+        break;
+
+      case 'message':
+        example = <MessageDemo />;
         break;
     }
     return (

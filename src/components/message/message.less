@@ -1,0 +1,48 @@
+@import url('../variables.less');
+@message-prefix-cls: ~"@{ns}message";
+
+.@{message-prefix-cls} {
+  font-size: 12px;
+  position: fixed;
+  z-index: 1050;
+  width: 100%;
+  top: 16px;
+
+  &-notice {
+    width: auto;
+    vertical-align: middle;
+    position: absolute;
+    left: 50%;
+  }
+
+  &-notice-content {
+    position: relative;
+    right: 50%;
+    padding: 8px 16px;
+    border-radius: @widget-border-radius;
+    border: 1px solid #d9d9d9;
+    box-shadow: @widget-overlay-shadow;
+    background: #fff;
+    display: block;
+  }
+
+  &-custom-content {
+  }
+
+  &-success {
+    color: @widget-success-color;
+  }
+
+  &-error {
+    color: @widget-error-color;
+  }
+
+  &-info, &-loading  {
+    color: @widget-primary-color;
+  }
+
+  .glyph-icon {
+    margin-right: 8px;
+    font-size: @font-size-sm;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-var Tag = require('./TagItem');
-var Suggestions = require('./Suggestions');
+import Tag from './TagItem';
+import Suggestions from './Suggestions';
 
 // Constants
 const Keys = {
@@ -65,7 +65,7 @@ class ReactTags extends Component {
 
   handleKeyDown = (e) => {
 
-    var {
+    let {
       query, selectedIndex, suggestions
     } = this.state;
 
@@ -87,16 +87,17 @@ class ReactTags extends Component {
       }
       this.addTag(query);
     }
+    let inputVal = this.refs.input.value;
 
     // when backspace key is pressed and query is blank, delete tag
-    if (e.keyCode === Keys.BACKSPACE && query == "" && this.props.allowDeleteFromEmptyInput) { //
+    if (e.keyCode === Keys.BACKSPACE && query == "" && inputVal === "" && this.props.allowDeleteFromEmptyInput) { //
       this.handleDelete(this.props.tags.length - 1);
     }
 
     // up arrow
     if (e.keyCode === Keys.UP_ARROW) {
       e.preventDefault();
-      var selectedIndex = this.state.selectedIndex;
+      let selectedIndex = this.state.selectedIndex;
       // last item, cycle to the top
       if (selectedIndex <= 0) {
         this.setState({
@@ -107,7 +108,7 @@ class ReactTags extends Component {
         this.setState({
           selectedIndex: selectedIndex - 1,
           selectionMode: true
-        });
+        });``
       }
     }
 

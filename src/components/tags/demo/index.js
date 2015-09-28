@@ -5,7 +5,7 @@ import ReactTags from '../ReactTags';
 class TagDemo extends Component {
   state = {
     tags: [ {id: 1, text: "Apples"} ],
-    suggestions: ["Banana", "Mango", "Pear", "Apricot"]
+    suggestions: ["BananaBanana","BananaBanana1","BananaBanana2","BananaBanana3", "Mango", "Pear", "Apricot"]
   }
 
   handleDelete = (i) => {
@@ -50,8 +50,9 @@ class TagDemo extends Component {
         </div>
         <div className="container">
           <h2>带输入框的TAG</h2>
-          <ReactTags tags={tags}
-            suggestions={suggestions}
+          <ReactTags tags={this.state.tags}
+            suggestions={this.state.suggestions}
+            amStyle={'primary'}
             labelField = {'text'}
             handleDelete={this.handleDelete}
             handleAddition={this.handleAddition} />

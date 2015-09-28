@@ -64,6 +64,7 @@ class ReactTags extends Component {
   }
 
   handleKeyDown = (e) => {
+
     var {
       query, selectedIndex, suggestions
     } = this.state;
@@ -138,11 +139,11 @@ class ReactTags extends Component {
     input.focus();
   }
 
-  handleSuggestionClick = function (i, e) {
+  handleSuggestionClick = (i, e) => {
     this.addTag(this.state.suggestions[i]);
   }
 
-  handleSuggestionHover = function (i, e) {
+  handleSuggestionHover = (i, e) => {
     this.setState({
       selectedIndex: i,
       selectionMode: true

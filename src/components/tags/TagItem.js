@@ -40,7 +40,10 @@ class TagItem extends Component {
     this.setState({
       closing: true
     });
-    this.props.onDelete.call(this, e);
+    // delay to invoke delete.
+    setTimeout(()=> {
+      this.props.onDelete.call(this, e);
+    }, 300);
   }
 
   animationEnd () {

@@ -11,7 +11,7 @@
          clearTimeout(timers[k]);
        }
      }
-   },
+   }
 
    setTimeout(key, cb, duration) {
      var timers = this._timers || (this._timers = Object.create(null));

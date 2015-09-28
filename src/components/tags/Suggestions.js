@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+if (process.env.BROWSER) {
+  require('./Suggestions.less');
+}
 // determines the min query length for which
 // suggestions are displayed
 const MIN_QUERY_LENGTH = 2;

@@ -1,4 +1,7 @@
-import velocity from './velocity';
+if (process.env.BROWSER) {
+  // for node environment, we should load velocity.
+  var velocity = require('velocity-animate');
+}
 
 function animate(node, show, transitionName, done) {
   let ok;

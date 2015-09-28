@@ -44,7 +44,8 @@
     "redux-simple-promise": "^2.0.2",
     "redux-thunk": "^0.1.0",
     "serve-favicon": "^2.3.0",
-    "wurl": "^2.0.1"
+    "wurl": "^2.0.1",
+    "velocity-animate": "~1.2.3"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.1.0",

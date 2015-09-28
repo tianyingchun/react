@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import RcMenu from 'rc-menu';
-import animation from '../core/openAnimation';
+import platform from '../../utils/platform';
+
+let { msie, version } = platform;
+let disableVelocityAnimation = (msie && parseInt(version) < 9);
+
+let animation;
 if (process.env.BROWSER) {
   require('./menu.less');
+  // ie9+
+  if(!disableVelocityAnimation) {
+    animation = require('../core/openAnimation');
+  }
 }
+
 class Menu extends Component {
+
   static defaultProps = {
     prefixCls: 'menu'
   }
+
   render () {
     let openAnimation = '';
     switch (this.props.mode) {
@@ -19,17 +31,24 @@ class Menu extends Component {
         break;
       case 'inline':
         openAnimation = animation;
+        if (disableVelocityAnimation) {
+          openAnimation = '';
+        }
         break;
       default:
     }
+
     if (this.props.mode === 'inline') {
-      return <RcMenu {...this.props} openAnimation={openAnimation} />;
+      if (disableVelocityAnimation) {
+        return <RcMenu {...this.props} openTransitionName={openAnimation} />;
+      } else {
+        return <RcMenu {...this.props} openAnimation={openAnimation} />;
+      }
     } else {
       return <RcMenu {...this.props} openTransitionName={openAnimation} />;
     }
   }
 }
-
 
 Menu.Divider = RcMenu.Divider;
 Menu.Item = RcMenu.Item;

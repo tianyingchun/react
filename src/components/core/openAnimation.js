@@ -1,4 +1,4 @@
-import velocity from 'velocity-animate';
+import velocity from './velocity';
 
 function animate(node, show, transitionName, done) {
   let ok;

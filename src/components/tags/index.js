@@ -11,7 +11,7 @@ class Tag extends Component {
   static defaultProps = {
     prefixCls: 'tag',
     closable: false,
-    amStyle: 'default',
+    amStyle: '',
     onClose: function() {}
   }
 
@@ -23,7 +23,7 @@ class Tag extends Component {
     // success: 'success',
     // warning: 'warning',
     // danger: 'danger'
-    amStyle:  React.PropTypes.oneOf(['default', 'primary', 'secondary', 'success', 'warning', 'danger']),
+    amStyle:  React.PropTypes.oneOf(['', 'default', 'primary', 'secondary', 'success', 'warning', 'danger']),
     onClose: React.PropTypes.func
   }
 

@@ -17,8 +17,10 @@ class TagDemo extends Component {
         </div>
         <div className="container">
           <h2>四种颜色的标签。</h2>
+          <Tag closable>默认</Tag>
           <Tag closable amStyle="primary">蓝色</Tag>
-          <Tag closable amStyle="secondary">绿色</Tag>
+          <Tag closable amStyle="default">默认灰</Tag>
+          <Tag closable amStyle="secondary">浅蓝色</Tag>
           <Tag closable amStyle="warning">黄色</Tag>
           <Tag closable amStyle="danger">红色</Tag>
         </div>

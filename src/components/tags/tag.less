@@ -8,7 +8,7 @@
   padding: 0 8px;
   border-radius: 20px;
   background: #f3f3f3;
-  font-size: @widget-font-size-base;
+  font-size: @font-size-xs;
   margin-right: 4px;
   margin-bottom: 8px;
   transition: all 0.3s @ease-in-out-circ;
@@ -47,6 +47,7 @@
   &-secondary,
   &-success,
   &-warning,
+  &-info,
   &-danger {
     &,
     a,
@@ -80,6 +81,9 @@
     background: @widget-danger-color;
   }
 
+  &-info {
+    background: @widget-info-color;
+  }
   &-close {
 
     width: 0 !important;

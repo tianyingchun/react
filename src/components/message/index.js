@@ -23,7 +23,7 @@ function notice(content, duration = defaultDuration, type, onClose) {
   let iconClass = ({
     'info': 'glyph-notification message-info',
     'success': 'glyph-notification message-success',
-    'error': 'glyph-notification message-error',
+    'danger': 'glyph-notification message-danger',
     'loading': 'glyph-spinner glyph-spin message-loading'
   })[type];
 
@@ -59,7 +59,7 @@ export default {
     return notice(content, duration, 'success', onClose);
   },
   error(content, duration, onClose) {
-    return notice(content, duration, 'error', onClose);
+    return notice(content, duration, 'danger', onClose);
   },
   loading(content, duration, onClose) {
     return notice(content, duration, 'loading', onClose);

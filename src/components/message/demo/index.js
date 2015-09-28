@@ -20,7 +20,7 @@ class MessageDemo extends Component {
   }
 
   showLoading = () => {
-    message.loading('这是一条Loading的提示,并将于10秒后消失', 10);
+    message.loading('正在处理中...', 10);
   }
   render () {
     return (

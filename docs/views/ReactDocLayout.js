@@ -5,7 +5,7 @@ import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
 import MenuDemo from '../../src/components/menu/demo';
 import MessageDemo from '../../src/components/message/demo';
-
+import TagDemo from '../../src/components/tags/demo';
 
 class ReactDocLayout extends React.Component {
   state = {
@@ -53,6 +53,10 @@ class ReactDocLayout extends React.Component {
 
       case 'message':
         example = <MessageDemo />;
+        break;
+
+      case 'tag':
+        example = <TagDemo />;
         break;
     }
     return (

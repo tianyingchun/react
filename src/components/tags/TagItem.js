@@ -17,12 +17,6 @@ class TagItem extends Component {
 
   static propTypes = {
     closale: React.PropTypes.bool,
-    // default: 'default',
-    // primary: 'primary',
-    // secondary: 'secondary',
-    // success: 'success',
-    // warning: 'warning',
-    // danger: 'danger'
     amStyle:  React.PropTypes.oneOf(['', 'default', 'primary', 'secondary', 'success', 'warning', 'danger']),
     onDelete: React.PropTypes.func
   }
@@ -32,7 +26,7 @@ class TagItem extends Component {
     closed: false
   }
 
-  close (e) {
+  close = (e) => {
     let dom = ReactDOM.findDOMNode(this);
     dom.style.width = dom.offsetWidth + 'px';
     // It's Magic Code, don't know why
@@ -40,13 +34,11 @@ class TagItem extends Component {
     this.setState({
       closing: true
     });
-    // delay to invoke delete.
-    setTimeout(()=> {
-      this.props.onDelete.call(this, e);
-    }, 300);
   }
 
   animationEnd () {
+    // invoke delete while animation ending.
+    this.props.onDelete.call(this, e);
     this.setState({
       closed: true,
       closing: false
@@ -55,7 +47,7 @@ class TagItem extends Component {
 
   render () {
     let close = this.props.closable
-      ? <i className="glyph-icon glyph-cancel-circle" onClick={this.close.bind(this)}></i>
+      ? <i className="glyph-icon glyph-cancel-circle" onClick={this.close}></i>
       : '';
 
     let themeClass = this.props.amStyle ? this.props.prefixCls + '-' + this.props.amStyle : '';
@@ -66,9 +58,9 @@ class TagItem extends Component {
       this.state.closed
       ? null
       : <Animate component=""
-           showProp="data-show"
-           transitionName="zoom-tag"
-           onEnd={this.animationEnd.bind(this)}>
+          showProp="data-show"
+          transitionName="zoom-tag"
+          onEnd={this.animationEnd.bind(this)}>
           <div data-show={!this.state.closing} className={className}>
             <a className={this.props.prefixCls + '-text'}>{this.props.children}</a>
             {close}

@@ -28,12 +28,11 @@
   }
 
   .glyph-icon {
-    .iconfont-size-under-12px(10px);
+    .iconfont-size-under-12px(10px, @font-size-xs);
     cursor: pointer;
     font-weight: bold;
     margin-left: 3px;
     position: relative;
-    top: -1px;
     color: #666;
     transition: all 0.3s ease;
     opacity: 0.66;
@@ -84,8 +83,8 @@
   &-info {
     background: @widget-info-color;
   }
-  &-close {
 
+  &-close {
     width: 0 !important;
     padding: 0;
     margin-right: 0;

@@ -3,9 +3,12 @@ import { Link } from 'react-router';
 import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
+import ButtonDemo from '../../src/components/button/demo';
+
 import MenuDemo from '../../src/components/menu/demo';
 import MessageDemo from '../../src/components/message/demo';
 import TagDemo from '../../src/components/tags/demo';
+import SelectDemo from '../../src/components/select/demo';
 
 class ReactDocLayout extends React.Component {
   state = {
@@ -43,6 +46,10 @@ class ReactDocLayout extends React.Component {
     let params = this.props.params;
     let example = '什么都还没有呢？';
     switch (params.component) {
+      case 'button':
+        example = <ButtonDemo />;
+        break;
+
       case 'draggable':
         example = <DraggableDemo />;
         break;
@@ -57,6 +64,9 @@ class ReactDocLayout extends React.Component {
 
       case 'tag':
         example = <TagDemo />;
+        break;
+      case 'select':
+        example = <SelectDemo />
         break;
     }
     return (

@@ -13,6 +13,7 @@ class DockMenu extends Component {
         </li>
         <li><Link to="/docs/react/button" activeClassName="active">Button</Link></li>
         <li><Link to="/docs/react/layout" activeClassName="active">Layout</Link></li>
+        <li><Link to="/docs/react/scrollArea" activeClassName="active">ScrollArea</Link></li>
         <li><Link to="/docs/react/draggable" activeClassName="active">Draggable</Link></li>
         <li><Link to="/docs/react/menu" activeClassName="active">Menu</Link></li>
         <li><Link to="/docs/react/message" activeClassName="active">Message</Link></li>

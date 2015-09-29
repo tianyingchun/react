@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import dom from '../../utils/dom';
 import mixin from '../../utils/mixin';
 import PureRenderMixin from '../../mixins/PureRenderMixin';
 import Scrollbar from './scrollBar'
@@ -14,17 +15,22 @@ class ScrollArea extends mixin(PureRenderMixin) {
     contentClassName: React.PropTypes.string,
     vertical: React.PropTypes.bool,
     horizontal: React.PropTypes.bool,
-    // the width of scrollArea container, can be set via Layout dynamicly.
-    height: React.PropTypes.number,
-    // the height of scrollArea container, can be set via Layout dynamicly.
-    width: React.PropTypes.number,
+    // the fixedHeight of scrollArea container.
+    fixedHeight: React.PropTypes.number,
+    // the width of scrollArea container.
+    fixedWidth: React.PropTypes.number,
+
+    // veritcal scroll (top + bottom) padding.
+    offsetYPadding: React.PropTypes.number,
+
     amSize: React.PropTypes.oneOf(['sm', 'md']) // only small size(sm) and normal size(default)
   }
 
   static defaultProps = {
     speed: 1,
     vertical: true,
-    horizontal: true
+    horizontal: true,
+    offsetYPadding: 10
   }
 
   state = {
@@ -36,12 +42,11 @@ class ScrollArea extends mixin(PureRenderMixin) {
     realWidth: 0,
     scrollableX: false,
     scrollableY: false,
-
     // for scrollarea we need to specific fixed width and height in order to calculate the scrollSize.
     // Maybe we can get the height and width via Layout conponent 'onLayoutChanged' event.
     // Normally, it scrollarea nested in `Layout` component, we should not specificed width and height.
-    fixedContainerHeight: this.props.height || 0,
-    fixedContainerWidth: this.props.width || 0
+    fixedContainerHeight: this.props.fixedHeight || 0,
+    fixedContainerWidth: this.props.fixedWidth || 0
   }
 
   componentDidMount() {
@@ -69,15 +74,12 @@ class ScrollArea extends mixin(PureRenderMixin) {
    */
   resetScrollArea (containerInfo) {
     if (containerInfo) {
-
       var bound = {
         fixedContainerWidth: containerInfo.width || this.state.fixedContainerWidth,
         fixedContainerHeight: containerInfo.height || this.state.fixedContainerHeight
       };
-
       // console.log('resetScrollArea', containerInfo, bound);
       let newState = Object.assign({}, this.state, bound);
-
       this.setState(newState);
 
       // this.setSizesToState();
@@ -154,22 +156,22 @@ class ScrollArea extends mixin(PureRenderMixin) {
   }
 
   computeSizes() {
-    let realHeight = this.refs.content.offsetHeight;
+    let realHeight = dom.getHeight(this.refs.content);
     let containerHeight = ReactDOM.findDOMNode(this).offsetHeight;
-    let realWidth = this.refs.content.offsetWidth;
+    let realWidth = dom.getWidth(this.refs.content.firstChild);
     let containerWidth = ReactDOM.findDOMNode(this).offsetWidth;
+    // console.log(realHeight, containerHeight, realWidth, containerWidth)
     let scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
     let scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
 
     // if we don't have providered fixed width and height for scrollArea container.
     // try to fetch parent offetWidth, offsetHeight.
     let pNode = ReactDOM.findDOMNode(this).parentElement;
-    let fixedContainerHeight = this.props.height || pNode.offsetHeight;
-    let fixedContainerWidth= this.props.width || pNode.offsetWidth;
-
+    let fixedContainerHeight = this.props.fixedHeight || pNode.offsetHeight;
+    let fixedContainerWidth= this.props.fixedWidth || pNode.offsetWidth;
 
     return {
-      realHeight: realHeight,
+      realHeight: realHeight + this.props.offsetYPadding,
       containerHeight: containerHeight,
       realWidth: realWidth,
       containerWidth: containerWidth,
@@ -239,7 +241,7 @@ class ScrollArea extends mixin(PureRenderMixin) {
         type = "horizontal"
         amSize ={amSize} />
       ) : null;
-
+    console.log(realWidth, realHeight)
     let style = {
       marginTop: this.state.topPosition,
       marginLeft: this.state.leftPosition

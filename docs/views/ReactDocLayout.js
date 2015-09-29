@@ -5,7 +5,7 @@ import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
 import ButtonDemo from '../../src/components/button/demo';
 import LayoutDemo from '../../src/components/layout/demo';
-
+import ScrollAreaDemo from '../../src/components/scrollarea/demo';
 import MenuDemo from '../../src/components/menu/demo';
 import MessageDemo from '../../src/components/message/demo';
 import TagDemo from '../../src/components/tags/demo';
@@ -59,6 +59,9 @@ class ReactDocLayout extends React.Component {
     switch (params.component) {
       case 'layout':
         example = <LayoutDemo target={params.target}/>;
+        break;
+      case 'scrollArea':
+        example = <ScrollAreaDemo />;
         break;
       case 'button':
         example = this.getComponents(<ButtonDemo />);

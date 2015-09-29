@@ -4,6 +4,7 @@ import { Layout, LayoutSplitter, ScrollArea } from '../../src/components';
 import { default as DraggableDemo } from '../../src/components/draggable/demo';
 import DocMenu from '../components/DocMenu';
 import ButtonDemo from '../../src/components/button/demo';
+import LayoutDemo from '../../src/components/layout/demo';
 
 import MenuDemo from '../../src/components/menu/demo';
 import MessageDemo from '../../src/components/message/demo';
@@ -15,7 +16,7 @@ class ReactDocLayout extends React.Component {
     layoutWidth: 220,
     layoutHeight: 400,
     layoutWidthFlex: 0,
-    layoutHeightFlex: 0
+    layoutHeightFlex: 400
   }
 
   layoutChanged = (layoutInfo) => {
@@ -28,7 +29,7 @@ class ReactDocLayout extends React.Component {
     };
     // performance
     // directly reset scrollarea instead setState() on the hight level to re render all components.
-    this.refs.leftContainer.resetScrollArea(newState);
+    // this.refs.leftContainer.resetScrollArea(newState);
   }
   layoutChangedFlex = (layoutInfo) => {
     console.log('layoutInfoFlex',layoutInfo)
@@ -36,51 +37,62 @@ class ReactDocLayout extends React.Component {
 
     let newState = {
       width: layoutWidth || this.state.layoutWidthFlex,
-      height: (layoutHeight || this.state.layoutHeightFlex)-20
+      height: (layoutHeight || this.state.layoutHeightFlex)
     };
-
-    this.refs.flexContainer.resetScrollArea(newState);
-
+    if(this.refs.flexContainer) {
+      // this.refs.flexContainer.resetScrollArea(newState);
+    }
+  }
+  getComponents (child) {
+    // here cause of we used ScrollArea nested into Layout component,
+    // we should not speficied the width and height for `ScrollArea`.
+    return (
+      <ScrollArea speed={0.8} ref="flexContainer" amSize={'sm'} contentClassName="content">
+        {child}
+      </ScrollArea>
+    );
   }
   render () {
     let params = this.props.params;
+    console.log('router params',params);
     let example = '什么都还没有呢？';
     switch (params.component) {
+      case 'layout':
+        example = <LayoutDemo target={params.target}/>;
+        break;
       case 'button':
-        example = <ButtonDemo />;
+        example = this.getComponents(<ButtonDemo />);
         break;
 
       case 'draggable':
-        example = <DraggableDemo />;
+        example = this.getComponents(<DraggableDemo />);
         break;
 
       case 'menu':
-        example = <MenuDemo />;
+        example = this.getComponents(<MenuDemo />);
         break;
 
       case 'message':
-        example = <MessageDemo />;
+        example = this.getComponents(<MessageDemo />);
         break;
 
       case 'tag':
-        example = <TagDemo />;
+        example = this.getComponents(<TagDemo />);
         break;
       case 'select':
-        example = <SelectDemo />
+        example = this.getComponents(<SelectDemo />);
         break;
     }
     return (
       <Layout className="row" fill='container'>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
-            <ScrollArea ref="leftContainer" speed={0.8} width={this.state.layoutWidth} height={this.state.layoutHeight} amSize={'sm'} contentClassName="content">
+            <ScrollArea ref="leftContainer" speed={0.8} amSize={'sm'} contentClassName="content">
               <DocMenu />
             </ScrollArea>
           </Layout>
           <LayoutSplitter layoutWidth={11} />
           <Layout layoutWidth='flex' onLayoutChanged={this.layoutChangedFlex}>
-            <ScrollArea speed={0.8} ref="flexContainer" width={this.state.layoutWidthFlex} height={this.state.layoutHeightFlex} amSize={'sm'} contentClassName="content">
-              {example}
-            </ScrollArea>
+            {example}
           </Layout>
       </Layout>
     );

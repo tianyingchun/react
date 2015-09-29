@@ -59,6 +59,7 @@ class Layout extends Component {
   }
 
   componentDidMount() {
+    console.log('`Layout` component did mount');
     events.on(window, 'resize', this.handleResize);
     // auto trigger onece.
     this.handleResize();
@@ -79,7 +80,6 @@ class Layout extends Component {
       let domNode = ReactDOM.findDOMNode(this)
       this.state.layoutWidth = domNode.parentElement.clientWidth;
       this.state.layoutHeight = domNode.parentElement.clientHeight;
-
       this.setState(this.state);
     }
 
@@ -211,7 +211,7 @@ class Layout extends Component {
 
   render() {
 
-    // console.log('layout render!');
+    console.log('`Layout` component rendering!');
     let width = this.getWidth();
     let height = this.getHeight();
 

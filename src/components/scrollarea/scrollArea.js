@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
+import mixin from '../../utils/mixin';
+import PureRenderMixin from '../../mixins/PureRenderMixin';
 import Scrollbar from './scrollBar'
 import events from '../../utils/events';
 
-class ScrollArea extends React.Component {
+class ScrollArea extends mixin(PureRenderMixin) {
 
   static propTypes = {
     className: React.PropTypes.string,
@@ -37,12 +39,14 @@ class ScrollArea extends React.Component {
 
     // for scrollarea we need to specific fixed width and height in order to calculate the scrollSize.
     // Maybe we can get the height and width via Layout conponent 'onLayoutChanged' event.
+    // Normally, it scrollarea nested in `Layout` component, we should not specificed width and height.
     fixedContainerHeight: this.props.height || 0,
     fixedContainerWidth: this.props.width || 0
   }
 
   componentDidMount() {
     events.on(window, "resize", this.bindedHandleWindowResize);
+
     this.setSizesToState();
   }
 
@@ -107,7 +111,7 @@ class ScrollArea extends React.Component {
     if (this.state.topPosition !== newState.topPosition || this.state.leftPosition !== newState.leftPosition) {
       events.preventDefault(e);
     }
-
+    newState = Object.assign({}, this.state, newState);
     this.setState(newState);
   }
 
@@ -156,13 +160,23 @@ class ScrollArea extends React.Component {
     let containerWidth = ReactDOM.findDOMNode(this).offsetWidth;
     let scrollableY = realHeight > containerHeight || this.state.topPosition != 0;
     let scrollableX = realWidth > containerWidth || this.state.leftPosition != 0;
+
+    // if we don't have providered fixed width and height for scrollArea container.
+    // try to fetch parent offetWidth, offsetHeight.
+    let pNode = ReactDOM.findDOMNode(this).parentElement;
+    let fixedContainerHeight = this.props.height || pNode.offsetHeight;
+    let fixedContainerWidth= this.props.width || pNode.offsetWidth;
+
+
     return {
       realHeight: realHeight,
       containerHeight: containerHeight,
       realWidth: realWidth,
       containerWidth: containerWidth,
       scrollableX: scrollableX,
-      scrollableY: scrollableY
+      scrollableY: scrollableY,
+      fixedContainerHeight: fixedContainerHeight,
+      fixedContainerWidth: fixedContainerWidth
     };
   }
 
@@ -171,7 +185,9 @@ class ScrollArea extends React.Component {
     if (sizes.realHeight !== this.state.realHeight
       || sizes.realWidth !== this.state.realWidth
       || sizes.containerHeight !== this.state.containerHeight
-      || sizes.containerWidth !== this.state.containerWidth) {
+      || sizes.containerWidth !== this.state.containerWidth
+      || sizes.fixedContainerHeight !== this.state.fixedContainerHeight
+      || sizes.fixedContainerWidth !== this.state.fixedContainerWidth) {
 
       this.setState(sizes);
     }
@@ -197,6 +213,7 @@ class ScrollArea extends React.Component {
     return state.scrollableX && this.props.horizontal;
   }
   render() {
+    console.log('`scrollArea` component rendering..');
     let { amSize, className, contentClassName } = this.props;
 
     let { realWidth, realHeight, fixedContainerHeight, fixedContainerWidth, containerWidth, containerHeight, topPosition, leftPosition } = this.state;
@@ -232,7 +249,12 @@ class ScrollArea extends React.Component {
       width: fixedContainerWidth,
       height: fixedContainerHeight
     };
-
+    if(!fixedContainerWidth) {
+      delete scrollAreaStyle.width;
+    }
+    if(!fixedContainerHeight) {
+      delete scrollAreaStyle.height;
+    }
     let classes = classNames('scrollarea' ,className);
     let contentClasses = classNames('scrollarea-content', contentClassName);
 

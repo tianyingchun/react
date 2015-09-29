@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Button from '../index';
 
 class ButtonDemo extends Component {
+  componentWillUpdate() {
+    console.log('update...')
+  }
   render () {
     return (
       <div className="container">

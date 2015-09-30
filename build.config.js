@@ -38,7 +38,7 @@ module.exports = {
         routes: './docs/app/routes.js',
         version: '',
         jsBundles: ['browser-polyfill.js', 'reactkits.js', 'docs/reactui/bundle.js${version}'],
-        cssBundles: ['http://172.16.233.137:2000/shared/less-ui/public/themes/glodon-yun/common.css','docs/reactui/bundle.css${version}']
+        cssBundles: ['http://172.16.233.137:2000/shared/less-ui/public/common.css','docs/reactui/bundle.css${version}']
       }
     }
   }

@@ -63,9 +63,15 @@ const getRenderParams = (req, env) => {
 
     // generate all css bundle files.
     _.each(fundProject.cssBundles || [], function (css) {
-      cssBundles.push(url.resolve(cdnRoot, _.template(css)({
+      let linkHref = url.resolve(cdnRoot, _.template(css)({
         version: version
-      })));
+      }));
+      let name = path.basename(linkHref, '.css');
+      var link = {
+        href: linkHref,
+        name: name
+      }
+      cssBundles.push(link);
     });
 
     // generate all js bundle files.

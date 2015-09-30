@@ -19,7 +19,7 @@ class DocLayout extends React.Component {
       <div className="wrapper">
         <DocumentMeta {...meta} />
         <Layout fill='window' className="doc-page">
-          <Layout layoutHeight={50}>
+          <Layout layoutHeight={50} style={{overflow:'initial'}}>
             <Header />
           </Layout>
           <Layout layoutHeight='flex' className="page-body container">

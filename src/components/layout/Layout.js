@@ -275,13 +275,13 @@ class Layout extends Component {
       [this.props.className]: !!this.props.className
     };
 
-    let style = Object.assign({}, this.props.style || {}, {
+    let style = Object.assign({}, {
       // Note. normally we should using scrollArea component to each layout container
       // So set overflow: hidden;
       overflow: 'hidden',
       width: width,
       height: height
-    });
+    }, this.props.style || {});
 
     if (this.props.fill === 'window') {
       Object.assign(style, {

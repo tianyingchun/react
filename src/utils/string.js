@@ -1,3 +1,4 @@
+import _ from './lang';
 const string = {
   /**
    * string formatter, _.stringFormat('my name is {0}{1}', 'yingchun', 'tian')

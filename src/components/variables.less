@@ -8,7 +8,7 @@
 // widget variables override.
 @widget-ns: ~"";
 @widget-overlay-shadow : 0 0 4px rgba(0, 0, 0, 0.17);
-@widget-global-radius: @radius-lg;
+@widget-global-radius: @global-radius;
 @widget-global-primary: @global-primary;
 @widget-text-color: @text-color;
 @widget-border-radius: @widget-global-radius;
@@ -26,3 +26,12 @@
 @widget-danger-color:@global-danger;
 @widget-info-color:@global-info;
 
+// menu item variables
+@widget-menu-item-active-bg: tint(@widget-global-primary, 95%);
+@widget-menu-item-active-color: @widget-global-primary;
+@widget-menu-item-selected-bg: tint(@widget-global-primary, 95%);
+@widget-menu-item-selected-color: @widget-global-primary;
+
+// topbar nav veriables
+@widget-topbar-inverse-link-hover-color:@topbar-inverse-link-hover-color;
+@widget-topbar-inverse-link-hover-bg: @topbar-inverse-link-hover-bg;

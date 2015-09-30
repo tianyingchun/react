@@ -14,7 +14,7 @@ class Head extends React.Component {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
         {DocumentMeta.renderAsReact()}
         {links.map((link, i) => {
-          return <link key={i} rel="stylesheet" type="text/css" href={ link } />;
+          return <link key={i} name={link.name} rel="stylesheet" type="text/css" href={ link.href } />;
         })}
       </head>
     );

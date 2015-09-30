@@ -5,12 +5,12 @@ import STRING from '../../src/utils/string';
 
 const URI = {
   /**
-   * get url path.
+   * Get current base url http://example.com
    * @param  {String} path  the url path '/workspace/list'
    * @param  {Object} query parameters {root:''}
    * @return {String}       the final path
    */
-  getYunRoot (path, query) {
+  getUrl (path, query) {
     const port = url('port'); // 443, 80.
     const hostname = url('hostname');
     const protocol = url('protocol');
@@ -24,6 +24,15 @@ const URI = {
     } else {
       return finalPath;
     }
+  },
+  /**
+   * get url path.
+   * @param  {String} path  the url path '/workspace/list'
+   * @param  {Object} query parameters {root:''}
+   * @return {String}       the final path
+   */
+  getYunRoot (path, query) {
+    return getUrl(path, query);
   },
 
   getWorkspaceRoot (path, query) {

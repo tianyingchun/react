@@ -68,7 +68,7 @@ class Header extends React.Component {
           </h1>
           <ul className="nav nav-pills topbar-nav">
             <RouteLink to="/docs/less" activeClassName="active">LESS UI</RouteLink>
-            <RouteLink to="/docs/react" activeClassName="active">React UI</RouteLink>
+            <RouteLink to="/docs/react/layout/flexlayout" activeClassName="active">React UI</RouteLink>
           </ul>
           <div className="topbar-right">
            <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">

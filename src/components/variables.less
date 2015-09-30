@@ -1,23 +1,49 @@
 @import '../../shared/less-ui/less/variables.less';
 @import (reference) '../../shared/less-ui/less/mixins/mixins.less';
-@import (reference) '../../shared/less-ui/less/mixins/widget-mixins.less';
+@import (reference) '../../shared/less-ui/less/mixins/widget.less';
 @import (reference) '../../shared/less-ui/less/glyphicons.less';
 
 @import 'core/compatibility.less';
 
 // widget variables override.
 @widget-ns: ~"";
-@widget-overlay-shadow : 0 0 4px rgba(0, 0, 0, 0.17);
-@widget-global-radius: @global-radius;
-@widget-global-primary: @global-primary;
-@widget-text-color: @text-color;
-@widget-border-radius: @widget-global-radius;
 
-//font size
-//using less-ui global variables.less definitions.
-//@font-size-xs;//@font-size-sm; //@font-size-base;
+// body
+// -----------------------------------------------------------------------------
+
+@widget-body-bg: @body-bg;
+@widget-overlay-shadow : 0 0 4px rgba(0, 0, 0, 0.17);
+@widget-text-color: @text-color;
+
+// Border radius reference less-ui/variables.less
+// -----------------------------------------------------------------------------
+
+// @global-radius:         0;
+// @radius-sm:             1px;
+// @radius-normal:         2px;
+// @radius-lg:             5px;
+
+// @global-rounded:         1000px;
+// @global-square:           0;
+
+
+// font size, using less-ui global variables.less definitions.
+// ------------------------------------------------------------------------------
+
+// @font-size-xxs:           @global-font-size - 0.6; // 10px - 1rem
+// @font-size-xs:            @global-font-size - 0.4; // 12px
+// @font-size-sm:            @global-font-size - 0.2; // 14px
+// @font-size-default:       @global-font-size;       // 16px
+// @font-size-lg:            @global-font-size + 0.2; // 18px
+// @font-size-xl:            @global-font-size + 0.8; // 24px
+// @font-size-xxl:           @global-font-size * 2;   // 32px
+// @font-size-xxxl:          @global-font-size * 2 + 1; // 42px
+
 
 // brand colors.
+// ------------------------------------------------------------------------------
+
+@widget-global-primary: @global-primary;
 @widget-default-color:#d4d4d4;
 @widget-primary-color:@global-primary;
 @widget-secondary-color:@global-secondary;
@@ -27,11 +53,15 @@
 @widget-info-color:@global-info;
 
 // menu item variables
-@widget-menu-item-active-bg: tint(@widget-global-primary, 95%);
+// ------------------------------------------------------------------------------
+
+@widget-menu-item-active-bg: #f5f5f5 ;//tint(@widget-global-primary, 95%);
 @widget-menu-item-active-color: @widget-global-primary;
-@widget-menu-item-selected-bg: tint(@widget-global-primary, 95%);
+@widget-menu-item-selected-bg: #f5f5f5; //tint(@widget-global-primary, 95%);
 @widget-menu-item-selected-color: @widget-global-primary;
 
 // topbar nav veriables
+// ------------------------------------------------------------------------------
+
 @widget-topbar-inverse-link-hover-color:@topbar-inverse-link-hover-color;
 @widget-topbar-inverse-link-hover-bg: @topbar-inverse-link-hover-bg;

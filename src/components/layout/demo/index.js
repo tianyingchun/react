@@ -158,13 +158,13 @@ class DemoLayout extends React.Component {
       <Layout fill='container'>
         <Layout layoutHeight={50} style={{marginTop: '20px'}}>
           <div className="container btn-toolbar">
-            <Link to="/docs/react/layout/horizontal" className="btn btn-xs btn-primary radius" activeClassName="active">Horizontal</Link>
-            <Link to="/docs/react/layout/fixedright" className="btn btn-xs btn-primary radius" activeClassName="active">Fixed right column</Link>
-            <Link to="/docs/react/layout/threecolumn" className="btn btn-xs btn-primary radius" activeClassName="active">Three column</Link>
-            <Link to="/docs/react/layout/oneflexhorizontalresize" className="btn btn-xs btn-primary radius" activeClassName="active">Horizontal Splitter</Link>
-            <Link to="/docs/react/layout/bothfixedhorizontalresize" className="btn btn-xs btn-primary radius"  activeClassName="active">Both fixed Horizontal Splitter</Link>
-            <Link to="/docs/react/layout/verticalresize" className="btn btn-xs btn-primary radius" activeClassName="active">Vertical Splitter</Link>
-            <Link to="/docs/react/layout/nested" className="btn btn-xs btn-primary radius" activeClassName="active">Nested</Link>
+            <Link to="/docs/react/layout/flexlayout/horizontal" className="btn btn-xs btn-primary radius" activeClassName="active">Horizontal</Link>
+            <Link to="/docs/react/layout/flexlayout/fixedright" className="btn btn-xs btn-primary radius" activeClassName="active">Fixed right column</Link>
+            <Link to="/docs/react/layout/flexlayout/threecolumn" className="btn btn-xs btn-primary radius" activeClassName="active">Three column</Link>
+            <Link to="/docs/react/layout/flexlayout/oneflexhorizontalresize" className="btn btn-xs btn-primary radius" activeClassName="active">Horizontal Splitter</Link>
+            <Link to="/docs/react/layout/flexlayout/bothfixedhorizontalresize" className="btn btn-xs btn-primary radius"  activeClassName="active">Both fixed Horizontal Splitter</Link>
+            <Link to="/docs/react/layout/flexlayout/verticalresize" className="btn btn-xs btn-primary radius" activeClassName="active">Vertical Splitter</Link>
+            <Link to="/docs/react/layout/flexlayout/nested" className="btn btn-xs btn-primary radius" activeClassName="active">Nested</Link>
           </div>
         </Layout>
         <Layout layoutHeight='flex' style={{borderTop: '1px solid #ccc'}}>

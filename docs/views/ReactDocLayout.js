@@ -13,7 +13,7 @@ import SelectDemo from '../../src/components/select/demo';
 
 class ReactDocLayout extends React.Component {
   state = {
-    layoutWidth: 220,
+    layoutWidth: 245,
     layoutHeight: 400,
     layoutWidthFlex: 0,
     layoutHeightFlex: 400
@@ -54,13 +54,14 @@ class ReactDocLayout extends React.Component {
   }
   render () {
     let params = this.props.params;
+    let { group, component, target } = params;
     console.log('router params',params);
-    let example = '什么都还没有呢？';
-    switch (params.component) {
-      case 'layout':
-        example = <LayoutDemo target={params.target}/>;
+    let example;
+    switch (component) {
+      case 'flexlayout':
+        example = <LayoutDemo target={target}/>;
         break;
-      case 'scrollArea':
+      case 'scrollarea':
         example = <ScrollAreaDemo />;
         break;
       case 'button':
@@ -90,7 +91,7 @@ class ReactDocLayout extends React.Component {
       <Layout className="row" fill='container'>
           <Layout layoutWidth={this.state.layoutWidth} onLayoutChanged={this.layoutChanged}>
             <ScrollArea ref="leftContainer" speed={0.8} amSize={'sm'} contentClassName="content">
-              <DocMenu />
+              <DocMenu group={group} component={component}/>
             </ScrollArea>
           </Layout>
           <LayoutSplitter layoutWidth={11} />

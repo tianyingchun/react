@@ -9,7 +9,7 @@
   z-index: 1001;
   border: 1px solid #d9d9d9;
   box-shadow: @widget-overlay-shadow;
-  border-radius: @widget-global-radius;
+  border-radius: @global-radius;
   color: @widget-text-color;
   margin-top: 0;
   &-item-group-list {
@@ -222,16 +222,16 @@
   &-vertical, &-horizontal {
     .@{menu-prefix-cls}-submenu {
       .@{menu-prefix-cls}-item:first-child {
-        border-radius: @widget-global-radius @widget-global-radius 0 0;
+        border-radius: @global-radius @global-radius 0 0;
       }
       .@{menu-prefix-cls}-item:last-child {
-        border-radius: 0 0 @widget-global-radius @widget-global-radius;
+        border-radius: 0 0 @global-radius @global-radius;
       }
       &:first-child {
-        border-radius: @widget-global-radius @widget-global-radius 0 0;
+        border-radius: @global-radius @global-radius 0 0;
       }
       &:last-child {
-        border-radius: 0 0 @widget-global-radius @widget-global-radius;
+        border-radius: 0 0 @global-radius @global-radius;
       }
     }
   }

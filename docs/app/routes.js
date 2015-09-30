@@ -11,7 +11,7 @@ export default function () {
     <Route component={ DocLayout }>
       <Route path='/(docs)' component={ Home } />
       <Route path='/(docs)/less(/:component)' component={ LessDocLayout } />
-      <Route path='/(docs)/react(/:component)(/:target)' component={ ReactDocLayout } />
+      <Route path='/(docs)/react(/:group)(/:component)(/:target)' component={ ReactDocLayout } />
       <Redirect from="/" to="/docs" />
       <Route path="*" component={ NoMatch } />
     </Route>

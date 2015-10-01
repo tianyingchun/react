@@ -24,14 +24,14 @@ app.use("/", function (req, res) {
     '  <meta http-equiv="Cache-Control" content="no-siteapp">' +
     '  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">' +
     '  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">' +
-    '  <link rel="stylesheet" type="text/css" name="common" href="http://172.16.233.137:4000/shared/less-ui/public/common.css">' +
-    '  <link rel="stylesheet" type="text/css" name="bundle" href="http://172.16.233.137:4000/public/docs/reactui/bundle.css">' +
+    '  <link rel="stylesheet" type="text/css" name="common" href="http://localhost:4000/shared/less-ui/public/common.css">' +
+    '  <link rel="stylesheet" type="text/css" name="bundle" href="http://localhost:4000/public/docs/reactui/bundle.css">' +
     '</head>' +
     '  <body>' +
     '    <div id="react-view"></div>' +
-    '    <script src="http://172.16.233.137:4000/public/browser-polyfill.js"></script>' +
-    '    <script src="http://172.16.233.137:4000/public/reactkits.js"></script>' +
-    '    <script src="http://172.16.233.137:4000/public/docs/reactui/bundle.js"></script>' +
+    '    <script src="http://localhost:4000/public/browser-polyfill.js"></script>' +
+    '    <script src="http://localhost:4000/public/reactkits.js"></script>' +
+    '    <script src="http://localhost:4000/public/docs/reactui/bundle.js"></script>' +
     '  </body>' +
     '</html>';
 

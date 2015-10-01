@@ -60,7 +60,7 @@ class DockMenu extends Component {
         <SubMenu key="layout" title={this.getMenuTitle("布局相关","Layout")}>
           <Menu.Item key="flexlayout">
             <Link to="/docs/react/layout/flexlayout" activeClassName="active">
-              {this.getMenuTitle("弹性布局素","Layout")}
+              {this.getMenuTitle("弹性布局素","FlexLayout")}
             </Link>
           </Menu.Item>
           <Menu.Item key="scrollarea">

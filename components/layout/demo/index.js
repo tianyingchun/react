@@ -118,7 +118,7 @@ class Nested extends React.Component {
   }
 }
 
-class DemoLayout extends React.Component {
+class LayoutDemo extends React.Component {
 
   constructor(props) {
     super(props);
@@ -175,4 +175,4 @@ class DemoLayout extends React.Component {
   }
 }
 
-export default DemoLayout;
+export default LayoutDemo;

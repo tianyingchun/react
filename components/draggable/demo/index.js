@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Draggable from '../index';
 
-class Demo extends Component {
+class DraggableDemo extends Component {
 
   state = {
     position: {
@@ -103,7 +103,7 @@ class Demo extends Component {
   }
 }
 
-export default Demo;
+export default DraggableDemo;
 
 
 

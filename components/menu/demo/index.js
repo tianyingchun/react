@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Menu, { SubMenu, Item as MenuItem } from '../index';
 
 // const MenuItem = Menu.Item;
-class DockMenu extends Component {
+class MenuDemo extends Component {
   state = {
     current: 'mail',
     current1: '1'
@@ -96,4 +96,4 @@ class DockMenu extends Component {
   }
 }
 
-export default DockMenu;
+export default MenuDemo;

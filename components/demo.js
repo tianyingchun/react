@@ -1,30 +1,39 @@
-import {
-  default as DraggableDemo
-}
-from './draggable/demo';
-
+// Elements
 import ButtonDemo from './button/demo';
+import TableDemo from './table/demo';
+
+// Layouts
 import LayoutDemo from './layout/demo';
 import ScrollAreaDemo from './scrollarea/demo';
 
-// navs
+// Navs
 import MenuDemo from './menu/demo';
 import BreadcrumbDemo from './breadcrumb/demo';
 
+// Interactive
+import DraggableDemo from './draggable/demo';
 import MessageDemo from './message/demo';
 import TagDemo from './tags/demo';
 import SelectDemo from './select/demo';
 
 export default {
-  DraggableDemo,
+  // Elements
   ButtonDemo,
+  TableDemo,
+
+  // Layouts
   LayoutDemo,
   ScrollAreaDemo,
 
+  // Forms
+  SelectDemo,
+
+  // Navs
   MenuDemo,
   BreadcrumbDemo,
 
+  // Interactive
+  DraggableDemo,
   MessageDemo,
-  TagDemo,
-  SelectDemo
+  TagDemo
 };

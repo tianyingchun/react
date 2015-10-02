@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Tag from '../TagItem';
-import ReactTags from '../ReactTags';
+import { Tag, ReactTags } from '../index';
 
 class TagDemo extends Component {
   state = {

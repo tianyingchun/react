@@ -1,3 +1,4 @@
+```html
 var buttonsInstance = (
   <ButtonToolbar>
     <Button>Default</Button>
@@ -11,3 +12,5 @@ var buttonsInstance = (
 );
 
 React.render(buttonsInstance, mountNode);
+
+```

@@ -6,11 +6,11 @@ var layoutGroup = {
   "children": [
     // the router path is */layout/flexlayout
     {
-      "name": "flexlayout",
+      "key": "flexlayout",
       "cName": "弹性布局素",
       "enName": "FlexLayout"
     }, {
-      "name": "scrollarea",
+      "key": "scrollarea",
       "cName": "滚动条",
       "enName": "ScrollArea"
     }
@@ -25,11 +25,11 @@ var elementGroup = {
   "children": [
     // the router path is */layout/flexlayout
     {
-      "name": "button",
+      "key": "button",
       "cName": "按钮",
       "enName": "Button"
     }, {
-      "name": "table",
+      "key": "table",
       "cName": "表格",
       "enName": "Table"
     }

@@ -6,8 +6,8 @@ import ClassNameMixin from '../../mixins/ClassNameMixin';
 class Icon extends mixin(ClassNameMixin) {
 
   static propTypes = {
-    amStyle: React.PropTypes.string,
-    amSize: React.PropTypes.string,
+    iStyle: React.PropTypes.string,
+    iSize: React.PropTypes.string,
     fw: React.PropTypes.bool,
     spin: React.PropTypes.bool,
     button: React.PropTypes.bool,
@@ -38,7 +38,7 @@ class Icon extends mixin(ClassNameMixin) {
     classes[prefixClass('btn')] = props.button;
 
     // button style
-    props.button && props.amStyle && (classes[setClassNamespace(props.amStyle)] = true);
+    props.button && props.iStyle && (classes[setClassNamespace(props.iStyle)] = true);
 
     // glyph-fw
     classes[prefixClass('fw')] = props.fw;

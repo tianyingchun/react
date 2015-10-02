@@ -21,7 +21,7 @@ class Button extends mixin(ClassNameMixin) {
   static defaultProps = {
     classPrefix: 'btn',
     type: 'button',
-    amStyle: 'default'
+    iStyle: 'default'
   }
 
   // state = {

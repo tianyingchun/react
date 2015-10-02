@@ -21,20 +21,20 @@ const ClassNameMixin = {
       !ignorePrefix && (classNames[classPrefix] = true);
     }
 
-    let amSize = this.props.amSize;
-    let amStyle = this.props.amStyle;
-    let theme = this.props.theme;
-    if (amSize) {
-      classNames[prefix + amSize] = true;
+    // style, theme, size.
+    let { iSize, iStyle, iTheme } = this.props;
+
+    if (iSize) {
+      classNames[prefix + iSize] = true;
     }
 
-    if (amStyle) {
-      classNames[prefix + amStyle] = true;
+    if (iStyle) {
+      classNames[prefix + iStyle] = true;
     }
 
     // add theme className for widgets
-    if (theme) {
-      classNames[prefix + theme] = true;
+    if (iTheme) {
+      classNames[prefix + iTheme] = true;
     }
 
     // states

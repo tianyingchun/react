@@ -100,6 +100,16 @@ var interactive = {
       "key": "tag",
       "cName": "标签",
       "enName": "Tag"
+    },
+    {
+      "key": "dropdown",
+      "cName": "下拉菜单",
+      "enName": "Dropdown"
+    },
+    {
+      "key": "popconfirm",
+      "cName": "气泡确认框",
+      "enName": "Popconfirm"
     }
   ]
 };

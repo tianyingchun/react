@@ -1,13 +1,19 @@
-import react, { Component } from 'react';
+import React, { Component } from 'react';
+import RcDropdown from 'rc-dropdown';
 
-export default class extends Component {
+if (process.env.BROWSER) {
+  require('./dropdown.less');
+}
+class Dropdown extends Component {
 
   static defaultProps = {
     transitionName: 'slide-up',
-    prefixCls: 'ant-dropdown'
+    prefixCls: 'dropdown'
   }
 
   render() {
-    return <Dropdown {...this.props} />;
+    return <RcDropdown {...this.props} />;
   }
 }
+
+export default Dropdown;

@@ -17,7 +17,9 @@ import Icon from './icon';
 import Draggable from './draggable';
 import Message from './message';
 import Tag from './tags';
+import Dropdown from './dropdown';
 import Select from './select';
+import Popconfirm from './popconfirm';
 
 export default {
   // Layouts
@@ -39,6 +41,7 @@ export default {
   Draggable,
   Message,
   Tag,
+  Dropdown,
   Select
 
   // Others

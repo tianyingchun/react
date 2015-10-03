@@ -17,7 +17,9 @@ import IconDemo from './icon/demo';
 import DraggableDemo from './draggable/demo';
 import MessageDemo from './message/demo';
 import TagDemo from './tags/demo';
+import DropdownDemo from './dropdown/demo';
 import SelectDemo from './select/demo';
+import PopconfirmDemo from './popconfirm/demo';
 
 export default {
   // Elements
@@ -41,5 +43,7 @@ export default {
   // Interactive
   DraggableDemo,
   MessageDemo,
-  TagDemo
+  TagDemo,
+  DropdownDemo,
+  PopconfirmDemo
 };

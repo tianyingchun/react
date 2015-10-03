@@ -10,6 +10,9 @@ import ScrollAreaDemo from './scrollarea/demo';
 import MenuDemo from './menu/demo';
 import BreadcrumbDemo from './breadcrumb/demo';
 
+// Commons
+import IconDemo from './icon/demo';
+
 // Interactive
 import DraggableDemo from './draggable/demo';
 import MessageDemo from './message/demo';
@@ -31,6 +34,9 @@ export default {
   // Navs
   MenuDemo,
   BreadcrumbDemo,
+
+  // Commons
+  IconDemo,
 
   // Interactive
   DraggableDemo,

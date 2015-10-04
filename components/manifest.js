@@ -110,6 +110,11 @@ var interactive = {
       "key": "popconfirm",
       "cName": "气泡确认框",
       "enName": "Popconfirm"
+    },
+    {
+      "key": "alert",
+      "cName": "警告框",
+      "enName": "Alert"
     }
   ]
 };

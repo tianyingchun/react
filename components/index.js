@@ -20,7 +20,7 @@ import Tag from './tags';
 import Dropdown from './dropdown';
 import Select from './select';
 import Popconfirm from './popconfirm';
-
+import Alert from './alert';
 export default {
   // Layouts
   Layout,
@@ -42,7 +42,7 @@ export default {
   Message,
   Tag,
   Dropdown,
-  Select
-
+  Select,
+  Alert
   // Others
 };

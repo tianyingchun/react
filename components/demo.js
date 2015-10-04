@@ -20,6 +20,7 @@ import TagDemo from './tags/demo';
 import DropdownDemo from './dropdown/demo';
 import SelectDemo from './select/demo';
 import PopconfirmDemo from './popconfirm/demo';
+import AlertDemo from './alert/demo';
 
 export default {
   // Elements
@@ -45,5 +46,6 @@ export default {
   MessageDemo,
   TagDemo,
   DropdownDemo,
-  PopconfirmDemo
+  PopconfirmDemo,
+  AlertDemo
 };

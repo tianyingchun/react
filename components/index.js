@@ -1,6 +1,7 @@
 // Layouts
 import Layout from './layout';
 import ScrollArea from './scrollarea';
+import IScroll from './iscroll';
 
 // Elements
 import Button from './button';
@@ -25,6 +26,7 @@ export default {
   // Layouts
   Layout,
   ScrollArea,
+  IScroll,
 
   // Elements
   Button,

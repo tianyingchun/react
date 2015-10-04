@@ -13,6 +13,10 @@ var layouts = {
       "key": "scrollarea",
       "cName": "滚动条",
       "enName": "ScrollArea"
+    }, {
+      "key": "iscroll",
+      "cName": "滚动条2",
+      "enName": "IScroll"
     }
   ]
 };

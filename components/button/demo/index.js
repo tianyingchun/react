@@ -25,8 +25,8 @@ class ButtonDemo extends Component {
 
         <h3>按钮SIZE</h3>
         <ButtonToolbar>
-          <Button iSize="xxs"><Icon icon="information" /> 默认(12px-xxs)</Button>
-          <Button iStyle="primary" iSize="xs"><Icon icon="radio-checked" /> 主要(12px-xs)</Button>
+          <Button iSize="xxs"><Icon icon="information" /> default(12px-xxs)</Button>
+          <Button iStyle="primary" iSize="xs"><Icon icon="radio-checked" /> primary(12px-xs)</Button>
           <Button iStyle="secondary" iSize="sm"><Icon icon="bin" /> Secondary(14px-sm)</Button>
           <Button iStyle="success"><Icon icon="spinner6" spin/> Success（16px)</Button>
           <Button iStyle="warning" iSize="lg"><Icon icon="success" /> Warning (18px-lg)</Button>

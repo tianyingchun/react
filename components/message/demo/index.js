@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, ButtonToolbar } from '../../button';
 import message from '../index';
 
 class MessageDemo extends Component {
@@ -24,14 +25,22 @@ class MessageDemo extends Component {
   }
   render () {
     return (
-      <div className="message-demo">
-        <div className="btn-group">
-          <button type="button" className="btn btn-primary" onClick={this.showSuccess}>success</button>
-          <button type="button" className="btn btn-danger" onClick={this.showFailed}>failed</button>
-          <button type="button" className="btn btn-primary" onClick={this.showNormal}>normal</button>
-          <button type="button" className="btn btn-primary" onClick={this.showCustomized}>custom</button>
-          <button type="button" className="btn btn-primary" onClick={this.showLoading}>Loading</button>
-        </div>
+      <div className="doc-content">
+        <h1>Message 全局提示</h1>
+        <p>全局展示操作反馈信息。</p>
+        <h2>何时使用</h2>
+        <ul>
+          <li>可提供成功、警告和错误等反馈信息。</li>
+          <li>顶部居中显示并自动消失，是一种不打断用户操作的轻量级提示方式。</li>
+        </ul>
+        <h2>组件演示</h2>
+        <ButtonToolbar>
+          <Button className="btn btn-primary" onClick={this.showSuccess}>success</Button>
+          <Button className="btn btn-danger" onClick={this.showFailed}>failed</Button>
+          <Button className="btn btn-primary" onClick={this.showNormal}>normal</Button>
+          <Button className="btn btn-primary" onClick={this.showCustomized}>custom</Button>
+          <Button className="btn btn-primary" onClick={this.showLoading}>Loading</Button>
+        </ButtonToolbar>
       </div>
     );
   }

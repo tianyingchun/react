@@ -14,11 +14,19 @@
 
   &-wrap {
     position: relative;
+    .glyph-icon {
+      filter: none;
+      display: inline-block;
+      transform: scale(.83333333) rotate(0deg);
+      zoom: 1;
+      &:before{
+        display: block;
+      }
+    }
     .glyph-arrow-down:before {
       transition: transform 0.2s ease;
     }
   }
-
   &-wrap-open {
     .glyph-arrow-down:before {
       .rotate(180deg);

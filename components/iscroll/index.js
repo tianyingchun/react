@@ -14,22 +14,23 @@ if (process.env.BROWSER) {
 
 class IScroll extends Component {
 
-  state = {
+  state = { }
 
-  }
   onRefresh = (iScrollInstance) => {
-    var yScroll = iScrollInstance.y;
-
-    console.log("vertical position:" + yScroll)
-
+    let yScroll = iScrollInstance.y;
     if (this.state.y != yScroll) {
       this.setState({y: yScroll})
     }
   }
 
+  onScrollHanlder = (evt) => {
+    console.log('scroll: ', evt);
+  }
+
   render () {
     return (
       <ReactIScroll
+        onScroll={this.onScrollHanlder}
         iscroll={_iScroll}
         onRefresh={this.onRefresh}>
         {this.props.children}

@@ -1,0 +1,85 @@
+@import url('../variables.less');
+
+.pull-to-refresh {
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  .ptr-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: @text-color;
+    z-index: 10;
+    text-align: center;
+    font-size: @font-size-base;
+  }
+  .arrow {
+    opacity: .6;
+    width: auto;
+    height: auto;
+    transition: transform .25s ease;
+    transform: rotate(0deg);
+    position: relative;
+    top: 2px;
+  }
+  .loading {
+    // nothing.
+  }
+  .ptr-content {
+    background: #fff;
+    min-height: 100%;
+    z-index: 20;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    padding: 20px 10px;
+  }
+  .loading-wrap {
+    display:none;
+  }
+
+  .ptr-indicator{
+    height: 30px;
+    line-height: 30px;
+    overflow:hidden;
+    &.arrow-wrap,
+    &.loading-wrap {
+      display: block;
+      position: relative;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+
+  // refreshing status.
+  &.ptr-refresh {
+    .arrow-wrap {
+      .arrow {
+        transform: rotate(-180deg);
+      }
+    }
+    .loading-wrap {
+      display: none;
+    }
+  }
+
+  // loading status while release dragging.
+  &.ptr-loading {
+    .arrow-wrap {
+      display: none;
+    }
+    .loading-wrap {
+      display: block;
+    }
+  }
+  // reset status while loading success.
+  &.ptr-reset {
+    .ptr-content {
+     // set transition easy animation while refresh content success.
+      transition: transform .25s ease;
+    }
+  }
+}
+
+
+

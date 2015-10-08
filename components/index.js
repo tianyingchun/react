@@ -1,6 +1,7 @@
 // Layouts
 import Layout from './layout';
 import ScrollArea from './scrollarea';
+import Scrollbar from './scrollbar';
 import IScroll from './iscroll';
 
 // Elements
@@ -26,6 +27,7 @@ export default {
   // Layouts
   Layout,
   ScrollArea,
+  Scrollbar,
   IScroll,
 
   // Elements

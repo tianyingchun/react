@@ -5,6 +5,7 @@ import TableDemo from './table/demo';
 // Layouts
 import LayoutDemo from './layout/demo';
 import ScrollAreaDemo from './scrollarea/demo';
+import ScrollbarDemo from './scrollbar/demo';
 import IScrollDemo from './iscroll/demo';
 
 
@@ -32,6 +33,7 @@ export default {
   // Layouts
   LayoutDemo,
   ScrollAreaDemo,
+  ScrollbarDemo,
   IScrollDemo,
 
   // Forms

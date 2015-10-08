@@ -23,14 +23,9 @@ class IScroll extends Component {
     }
   }
 
-  onScrollHanlder = (evt) => {
-    console.log('scroll: ', evt);
-  }
-
   render () {
     return (
       <ReactIScroll
-        onScroll={this.onScrollHanlder}
         iscroll={_iScroll}
         onRefresh={this.onRefresh}>
         {this.props.children}
